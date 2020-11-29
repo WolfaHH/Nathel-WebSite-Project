@@ -10,11 +10,11 @@ $router->map('GET', '/blog/[*:slug]-[i:id]', 'blog/article', 'article');
 
 $match = $router->match();
 
-require './view/template/header.php';
+require './view/elements/header.php';
 if (is_array($match)) {
 $params = $match['params'];
-require "./view/elements/{$match['target']}.php";
+require "./view/template/{$match['target']}.php";
 } else {
-require "./view/elements/404.php";
+require "./view/template/404.php";
 }
-require './view/template/footer.php';
+require './view/elements/footer.php';
