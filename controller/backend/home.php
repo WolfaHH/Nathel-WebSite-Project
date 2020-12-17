@@ -1,5 +1,14 @@
 <?php
 
+include '../../model/datebase/getpool.php';
+
+$data = new GetPool();
+
+$data->
+
+
+
+
 
 
 $display_pools[0] = ['name' => 'KimiPool Challenge',
