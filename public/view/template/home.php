@@ -1,6 +1,5 @@
 <!-- IMPORT -->
-<?php require_once('../controller/backend/home.php');
-$display_pools = $display_pools;
+<?php include_once('../controller/backend/home.php');
 ?>
 
 <main>

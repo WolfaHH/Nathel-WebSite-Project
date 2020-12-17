@@ -121,6 +121,4 @@ $display_pools[4] = ['name' => 'KimiPool Challenge',
             'mapper' => 'Cookiezi'],
     ]
 ];
-#...
-
 ?>
