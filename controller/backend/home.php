@@ -1,6 +1,6 @@
 <?php
 
-include '../../model/datebase/getpool.php';
+include '../../model/datebase/Mappool.php';
 
 $data = new GetPool();
 
