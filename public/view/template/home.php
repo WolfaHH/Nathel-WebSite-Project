@@ -14,7 +14,9 @@
 
     <div class="container">
         <h2> <?php echo  $d === 0 ? 'Most popular mappools' : 'Most recent mappools' ?></h2>
-        <?php for ($i = 0; $i <= 4; $i++) : ?>
+        <?php for ($i = 0; $i <= 4; $i++) :
+            if ($d == 1){ $i+=5;}
+            ?>
         <div class="mostpopular <?php $i ?>">
         <span><?php echo $display_pools[$i]['name'] ?></span>
         <span>from <?php echo $display_pools[$i]['from'] ?></span>
@@ -53,8 +55,9 @@
             </button>
         </form>
 
-        <?php endfor; ?>
+        <?php  endfor; ?>
     </div>
+    <?php if ($d == 1){ $i-=5;} ?>
     <?php endfor; ?>
 
     <div class="container">
