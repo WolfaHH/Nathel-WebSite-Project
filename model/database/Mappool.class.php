@@ -1,5 +1,5 @@
 <?php
-include 'Dbh.class.php';
+include 'Dbh.php';
 
 class Mappool extends Dbh{
 
