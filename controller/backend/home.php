@@ -1,13 +1,29 @@
 <?php
 
-include '../../model/datebase/Mappool.php';
+include '../model/database/Mappool.class.php';
 
-$data = new GetPool();
+$data = new Mappool();
 
-$data->
+$popular = $data->GetMostPopular();
+$recent = $data->GetMostRecent();
+var_dump($popular);
 
+foreach ($popular as $key => $value ):
+    $maps = $data->GetMapsFromMappool($popular['id']);
+    $collection_name = $data->GetCollectionInfoFromAPool($value['collection_id']);
+    $display_pools[$key] = [
+        'name' => $value['name'],
+        'from' => $collection_name,
+        'submitter' => $value['submitter'],
+        'nb_map' => $data->GetNbMaps(),
+        'categories' => [
+            'category' =>,
+            'rank_range' =>,
+            'custom_tags' =>,
+        ]
+    ];
 
-
+ endforeach;
 
 
 
