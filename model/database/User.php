@@ -44,25 +44,25 @@ class User extends Dbh
 
 
 
-    public static function ConnectUser($email, $password)
+    public static function ConnectUser($email, $password): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE email = :email AND password = :password');
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
 
 
-    public static function getUsers()
+    public static function getUsers(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM users');
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function getUser()
+    public function getUser(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
@@ -70,16 +70,7 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getUserScore($mappool_map_id)
-    {
-        $stmt = self::connectToDb()->prepare('SELECT * FROM user_scores WHERE user_id = :user_id AND mappool_map_id = :mappool_map_id');
-        $stmt->bindParam(':user_id', $this->id);
-        $stmt->bindParam(':mappool_map_id', $mappool_map_id);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-
-    public function getUserScores(Mappool $mappool)
+    public function getUserScores(Mappool $mappool): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM user_scores us INNER JOIN mappool_maps mm ON us.mappool_map_id = mm.id WHERE us.user_id = :user_id AND mm.id = :mappool_id');
         $stmt->bindParam(':user_id', $this->id);
@@ -88,7 +79,7 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getUserInvitations()
+    public function getUserInvitations(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM invitations WHERE receiver_id = :user_id');
         $stmt->bindParam(':user_id', $this->id);
@@ -96,7 +87,7 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getUserCollections()
+    public function getUserCollections(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM contributors cb INNER JOIN collections cl ON cb.collection_id = cl.id WHERE cb.user_id = :user_id  ');
         $stmt->bindParam(':user_id', $this->id);
@@ -104,7 +95,7 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getUserMappools()
+    public function getUserMappools(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappools WHERE user_id = :user_id  ');
         $stmt->bindParam(':user_id', $this->id);
@@ -112,7 +103,7 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getUserFollows()
+    public function getUserFollows(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_followed WHERE user_id = :user_id  ');
         $stmt->bindParam(':user_id', $this->id);
@@ -120,7 +111,7 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getUserFollowedMappools()
+    public function getUserFollowedMappools(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_followed mf INNER JOIN mappools ON mf.mappool_id = mappools.id WHERE mf.user_id = :user_id');
         $stmt->bindParam(':user_id', $this->id);
@@ -182,9 +173,15 @@ class User extends Dbh
         $stmt->execute();
     }
 
+    public function storeCreator($collection_id)
+    {
+        $stmt = self::connectToDb()->prepare('INSERT INTO contributors (user_id, collection_id, creator) VALUES (:user_id, :collection_id, 1)');
+        $stmt->bindParam(':user_id', $this->id);
+        $stmt->bindParam(':collection_id', $collection_id);
+        $stmt->execute();
+    }
 
-
-    public static function updateUser($id, $data)
+    public static function updateUser($id, $data): bool
     {
         $dbh = self::connectToDb();
         $stmt = $dbh->prepare('UPDATE users SET name = :name, email = :email, password = :password, thumbnail = :thumbnail, rank = :rank, country = :country, updated_at = NOW() WHERE id = :id');
@@ -198,7 +195,7 @@ class User extends Dbh
         return $stmt->execute();
     }
 
-    public function updateUserScore($mappool_map_id, $data)
+    public function updateUserScore($mappool_map_id, $data): bool
     {
         $stmt = self::connectToDb()->prepare('UPDATE user_scores SET score = :score, note = :note, accuracy = :accuracy, combo = :combo, `statistics.count_300` = :count_300, `statistics.count_100` = :count_100, `statistics.count_50` = :count_50, miss = :miss WHERE user_id = :user_id AND mappool_map_id = :mappool_map_id');
         $stmt->bindParam(':sender_id', $this->id);
@@ -213,7 +210,7 @@ class User extends Dbh
         return $stmt->execute();
     }
 
-    public function updateUserInvitation($accept)
+    public function updateUserInvitation($accept): bool
     {
         $stmt = self::connectToDb()->prepare('UPDATE invitations SET accept = :accept, deleted_at = null WHERE receiver_id = :receiver_id');
         $stmt->bindParam(':receiver_id', $this->id);
@@ -255,7 +252,7 @@ class User extends Dbh
         $stmt->execute();
     }
 
-    public function deleteInvitation($collection_id)
+    public function deleteInvitation($collection_id): bool
     {
         $stmt = self::connectToDb()->prepare('DELETE FROM invitations WHERE receiver_id = :receiver_id AND collection_id = :collection_id');
         $stmt->bindParam(':receiver_id', $this->id);
