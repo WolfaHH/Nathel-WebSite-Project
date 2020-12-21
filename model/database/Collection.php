@@ -9,7 +9,6 @@ class Collection extends Dbh{
     public $thumbnail;
     public $created_at;
     public $updated_at;
-    public $submitter;
     public $Description;
     public $follow;
 
@@ -103,9 +102,8 @@ class Collection extends Dbh{
     }
 
 
-
-
 }
+
 ?>
 
 }
