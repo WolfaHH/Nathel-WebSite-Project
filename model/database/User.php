@@ -181,6 +181,8 @@ class User extends Dbh
         $stmt->execute();
     }
 
+
+
     public static function updateUser($id, $data): bool
     {
         $dbh = self::connectToDb();
