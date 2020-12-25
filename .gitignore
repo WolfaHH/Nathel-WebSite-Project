@@ -1,2 +1,5 @@
-vendor
-.idea
+node_modules/
+vendor/
+.idea/
+composer.lock
+package-lock.json
