@@ -24,6 +24,8 @@ class Collection extends Dbh
         $this->updated_at = $collection['updated_at'];
     }
 
+
+
     public function getCollection(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM collections WHERE id = :id');
@@ -80,6 +82,14 @@ class Collection extends Dbh
         return $stmt->fetchAll();
     }
 
+    public function getTotalFollow(): int
+    {
+        $stmt = self::connectToDb()->prepare('SELECT COUNT(*) FROM collections INNER JOIN mappools ON collections.id = mappools.collection_id INNER JOIN mappool_followed mf on mappools.id = mf.mappool_id WHERE collections.id = :id GROUP BY mf.user_id');
+        $stmt->bindParam(':user_id', $this->id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
 
 
     public static function storeCollection(User $user, $data)
@@ -93,13 +103,6 @@ class Collection extends Dbh
         $id = $dbh->lastInsertId();
 
         $user->storeCreator($id);
-    }
-
-    private function storeMappoolInCollection()
-    {
-        /*
-         *
-         */
     }
 
     public static function storeNewTag($data): string
@@ -120,7 +123,9 @@ class Collection extends Dbh
         $stmt->execute();
     }
 
-    public function updateName($name)
+
+
+    public function updateName($name): bool
     {
         $stmt = self::connectToDb()->prepare('UPDATE collections SET name = :name, updated_at = NOW() WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
@@ -128,13 +133,15 @@ class Collection extends Dbh
         return $stmt->execute();
     }
 
-    private function updateDescription()
+    private function updateDescription(): bool
     {
         $stmt = self::connectToDb()->prepare('UPDATE collections SET description = :description, updated_at = NOW() WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':description', $description);
         return $stmt->execute();
     }
+
+
 
     public function deleteCollection()
     {
@@ -175,19 +182,5 @@ class Collection extends Dbh
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
     }
-
-
-
-    private function NbFollow()
-    {
-
-    }
-
-
-
-
-}
-?>
-
 }
 
