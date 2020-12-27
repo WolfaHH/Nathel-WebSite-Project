@@ -9,9 +9,9 @@ class UserController extends Controller
     protected function setUser()
     {
         if (isset($_GET['id'])) {
-            $user = new User($_GET['id']);
+            return new User($_GET['id']);
         } else if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
+            return $_SESSION['user'];
         } else {
             $this->error();
         }
@@ -24,9 +24,20 @@ class UserController extends Controller
         self::viewRegister();
         self::updateSession();
 
-        $this->setUser();
+        $user = $this->setUser();
 
-        require_once 'view/template/user.php';
+
+        $mappools = $user->getUserMappools();
+        foreach ($mappools as $mappool_user) {
+            $mappool = new Mappool($mappool_user['id']);
+            MappoolView::show($mappool);
+        }
+
+        $mappools = $user->getUserFollowedMappools();
+        foreach ($mappools as $mappool_user) {
+            $mappool = new Mappool($mappool_user['id']);
+            MappoolView::show($mappool);
+        }
 
     }
 }
