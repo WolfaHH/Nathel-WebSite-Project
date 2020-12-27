@@ -4,7 +4,7 @@ namespace Nathel;
 
 use \PDO;
 
-class Dbh {
+abstract class Dbh {
     protected $host = "localhost";
     protected $user = "root";
     protected $pwd = "";

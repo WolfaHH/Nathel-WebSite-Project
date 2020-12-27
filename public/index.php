@@ -7,6 +7,7 @@ $router = new AltoRouter();
 $router->map('GET', '/', 'home');
 $router->map('GET', '/contact', 'contact', 'contact');
 $router->map('GET', '/blog/[*:slug]-[i:id]', 'blog/article', 'article');
+$router->map('GET', '/user/[i:id]', 'user/show', 'user');
 
 $match = $router->match();
 
