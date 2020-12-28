@@ -1,6 +1,7 @@
 <?php
 
 namespace Nathel;
+require 'Autoloader.php';
 
 require 'Autoloader.php';
 

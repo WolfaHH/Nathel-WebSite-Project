@@ -1,11 +1,12 @@
 <?php
 
-
+echo 'blabla';
 
 require '../controller/controller.php';
 require '../controller/UserController.php';
 
 require '../vendor/autoload.php';
+require '../controller/controller.php';
 $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
 
@@ -32,6 +33,13 @@ if (is_array($match)) {
         $controller = new Nathel\UserController();
         $controller->Update();
     }
+
+    if ($match['target'] === 'home') {
+        $controller = new Nathel\HomeController();
+        $controller->showHome();
+    }
+
+
 /*
     if (isset($match['target'])) {
         $class = ucfirst($match['target']) . 'Controller';
@@ -40,6 +48,7 @@ if (is_array($match)) {
     }
 */
 } else {
+
 
     $controller = new Controller();
     $controller->error();

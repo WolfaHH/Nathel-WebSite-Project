@@ -1,20 +1,3 @@
-<?php switch($POOL) {
-    case 'home':
-        include_once('../controller/backend/home.php');
-        $max = 4;
-        $displayname1 = ;
-        $displayname2 = ;
-        $display_pools
-        break;
-    default: // User page
-        $max = ;
-        $displayname1 = ;
-        $displayname2 = ;
-        $display_pools = ;
-        include_once('../controller/backend/user.php');
-}?>
-
-
 <?php for ($d = 0; $d <=1; $d++) : ?>
 
     <div class="container">
