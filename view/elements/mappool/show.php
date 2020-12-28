@@ -1,40 +1,40 @@
-<?php for ($d = 0; $d <=1; $d++) : ?>
+<article class="card-mappool" style="background-image: url('<?= $mappool->thumbnail ?>')">
+    <h3 class="card-title"><?= $mappool->name ?></h3>
 
-    <div class="container">
-        <h2> <?php echo  $d === 0 ? $displayname1 : $displayname2 ?></h2>
-        <?php for ($i = 0; $i <= $max; $i++) :
-            if ($d == 1){ $i+=($max+1);}
-            ?>
-            <div class="mostpopular <?php $i ?>">
-                <span><?php echo $display_pools[$i]['name'] ?></span>
-                <span>from <?php echo $display_pools[$i]['from'] ?></span>
-                <span>submitted by <?php echo $display_pools[$i]['submitter'] ?></span>
-                <span> <?php echo $display_pools[$i]['nb_map'] ?> maps</span>
-                <span>
-            <?php foreach ($display_pools[$i]['categories'] as $category => $value ):?>
-                <span class="color-<?= $category ?>"><?= $value ?></span>
-            <?php endforeach; ?>
-        </span>
-                <form class="form-button">
-                    <button class="btn" type="submit">
-                        fleche && svg
-                        Follow
-                    </button>
-                </form>
-                <form class="fleche">
-                    <button class="btn" type="submit">
-                        icone svg fleche deroulante
-                    </button>
-                </form>
-            </div>
-            <?php include('view/elements/displaymaps.php'); ?>
-            <form class="form_button">
-                <button class="btn" type="submit">
-                    Show Mappool
-                </button>
-            </form>
+    <form class="form-follow" action="?" method="post">
 
-        <?php  endfor; ?>
+        <button type="submit" class="btn-<?= isset($is_follow) ? 'follow' : 'followed' ?>">
+
+            <?php if (isset($is_follow)): ?>
+
+            Followed
+
+            <?php else: ?>
+
+            icon flèche
+            follow
+
+            <?php endif; ?>
+
+        </button>
+
+    </form>
+
+    <a href="user/<?= $submitter->id ?>" class="submitter">created by <?= $submitter->name ?></a>
+    <span class="nb-maps"><?= count($mappool_maps) ?> Maps</span>
+
+    <div class="mappool-tags">
+        <?php foreach ($tags as $tag) : ?>
+
+        <span class="tag tag-<?= $tag['type'] ?>"><?= str_replace('_', ' ', $tag['name']) ?></span>
+
+        <?php endforeach; ?>
     </div>
-    <?php if ($d == 1){ $i-=($max+1);} ?>
-<?php endfor; ?>
+
+    icon arrow
+
+    <div>
+
+    </div>
+
+</article>

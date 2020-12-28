@@ -118,6 +118,15 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
+    public function getUserFollow(Mappool $mappool): array
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_followed WHERE user_id = :user_id AND mappool_id = :mappool_id  ');
+        $stmt->bindParam(':user_id', $this->id);
+        $stmt->bindParam(':mappool_id', $mappool->id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public function getUserFollowedMappools(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_followed mf INNER JOIN mappools ON mf.mappool_id = mappools.id WHERE mf.user_id = :user_id');

@@ -32,17 +32,11 @@ class UserController extends Controller
         UserView::activity($user);
 
         $mappools = $user->getUserMappools();
+        var_dump($mappools);
         MappoolView::section($mappools, 'submited Mappools');
-        foreach ($mappools as $mappool_user) {
-            $mappool = new Mappool($mappool_user['id']);
-            MappoolView::show($mappool);
-        }
 
         $mappools = $user->getUserFollowedMappools();
-        foreach ($mappools as $mappool_user) {
-            $mappool = new Mappool($mappool_user['id']);
-            MappoolView::show($mappool);
-        }
+        MappoolView::section($mappools, 'COMPLETED MAPPOOLS');
 
         View::footer();
 

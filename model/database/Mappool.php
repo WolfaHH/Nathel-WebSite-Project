@@ -14,16 +14,20 @@ class Mappool extends Dbh{
     public $submitter;
 
 
-    public function __construct($mappool_id){
-        $this->id = $mappool_id;
-        $mappool = $this->getMappool();
+    public function __construct($mappool){
+        if (is_array($mappool) === true){
+            $this->id = $mappool['id'];
+        } else {
+            $this->id = $mappool;
+            $mappool = $this->getMappool();
+        }
         $this->name = $mappool['name'];
         $this->collection_id = $mappool['collection_id'];
         $this->thumbnail = $mappool['thumbnail'];
         $this->follow = $mappool['follow'];
         $this->created_at = $mappool['created_at'];
         $this->updated_at = $mappool['updated_at'];
-        $this->updated_at = $mappool['submitter'];
+        $this->submitter = $mappool['user_id'];
         }
 
     private function getMappool()
@@ -31,7 +35,7 @@ class Mappool extends Dbh{
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappools WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public static function GetMostPopular($nb)
@@ -54,7 +58,7 @@ class Mappool extends Dbh{
     public function GetMaps()
     {
         $stmt = $this->connectToDb()->prepare('SELECT * FROM mappool_maps WHERE mappool_id = :mappool_id ORDER BY mode');
-        $stmt->bindParam(':mappool', $this->id);
+        $stmt->bindParam(':mappool_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();
     }

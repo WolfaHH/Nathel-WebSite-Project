@@ -4,9 +4,12 @@
 
     <?php
     foreach ($mappools as $mappool_user) {
-        $mappool = new Mappool($mappool_user['id']);
-        \Nathel\Mappool::show($mappool);
+        var_dump($mappool_user);
+        $mappool = new \Nathel\Mappool($mappool_user);
+
+        \Nathel\MappoolView::show($mappool);
     }
     ?>
-    
+
+
 </section>
