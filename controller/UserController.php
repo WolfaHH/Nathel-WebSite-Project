@@ -19,13 +19,19 @@ class UserController extends Controller
 
     public function showUser()
     {
-
+        // traitement de donnée
         self::modelRegister();
         self::viewRegister();
         self::updateSession();
 
         $user = $this->setUser();
 
+        // appel visuel de la page
+        View::header();
+
+        UserView::banner($user);
+
+        UserView::activity($user);
 
         $mappools = $user->getUserMappools();
         foreach ($mappools as $mappool_user) {
@@ -38,6 +44,8 @@ class UserController extends Controller
             $mappool = new Mappool($mappool_user['id']);
             MappoolView::show($mappool);
         }
+
+        View::footer();
 
     }
 }
