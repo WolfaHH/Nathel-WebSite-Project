@@ -40,6 +40,7 @@ class User extends Dbh
         $this->a = $user['a'];
         $this->created_at = $user['created_at'];
         $this->updated_at = $user['updated_at'];
+        
     }
 
 
@@ -75,6 +76,14 @@ class User extends Dbh
         $stmt = self::connectToDb()->prepare('SELECT * FROM user_scores us INNER JOIN mappool_maps mm ON us.mappool_map_id = mm.id WHERE us.user_id = :user_id AND mm.id = :mappool_id');
         $stmt->bindParam(':user_id', $this->id);
         $stmt->bindParam(':mappool_id', $mappool->id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getUserRecentPlay(): array
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM user_scores us INNER JOIN mappool_maps mm ON us.mappool_map_id = mm.id WHERE us.user_id = :user_id LIMIT 10');
+        $stmt->bindParam(':user_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();
     }

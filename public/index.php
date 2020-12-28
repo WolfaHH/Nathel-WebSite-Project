@@ -2,6 +2,9 @@
 
 
 
+require '../controller/controller.php';
+require '../controller/UserController.php';
+
 require '../vendor/autoload.php';
 $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
@@ -18,10 +21,11 @@ $match = $router->match();
 if (is_array($match)) {
 
     $params = $match['params'];
+    var_dump($params);
 
     if ($match['target'] === 'user') {
         $controller = new Nathel\UserController();
-        $controller->showUser();
+        $controller->showUser($params);
     }
 
     if ($match['target'] === 'userUpdate') {

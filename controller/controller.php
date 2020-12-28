@@ -1,8 +1,8 @@
 <?php
 
-//require('.php');
-
 namespace Nathel;
+
+require 'Autoloader.php';
 
 class Controller extends Autoloader
 {
@@ -26,7 +26,7 @@ class Controller extends Autoloader
 
     public function error()
     {
-        require('404.php');
+        require('../view/template/404.php');
     }
 }
 

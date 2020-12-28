@@ -3,6 +3,7 @@
         "symfony/var-dumper": "^5.1"
     },
     "require": {
-        "altorouter/altorouter": "1.2.0"
+        "altorouter/altorouter": "1.2.0",
+      "ext-pdo": "*"
     }
 }

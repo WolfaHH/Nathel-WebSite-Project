@@ -6,25 +6,25 @@ namespace Nathel;
 
 class UserController extends Controller
 {
-    protected function setUser()
+    protected function setUser($params)
     {
-        if (isset($_GET['id'])) {
-            return new User($_GET['id']);
+        if (isset($params['id'])) {
+            return new User($params['id']);
         } else if (isset($_SESSION['user'])) {
             return $_SESSION['user'];
         } else {
             $this->error();
+            die();
         }
     }
 
-    public function showUser()
+    public function showUser($params)
     {
         // traitement de donnée
-        self::modelRegister();
-        self::viewRegister();
+        self::Register();
         self::updateSession();
 
-        $user = $this->setUser();
+        $user = $this->setUser($params);
 
         // appel visuel de la page
         View::header();
