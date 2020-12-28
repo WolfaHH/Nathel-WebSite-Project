@@ -1,12 +1,11 @@
 <?php
 
-echo 'blabla';
-
-require '../controller/controller.php';
-require '../controller/UserController.php';
-
 require '../vendor/autoload.php';
-require '../controller/controller.php';
+
+require '../controller/Autoloader.php';
+\Nathel\Autoloader::Register();
+
+
 $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
 
@@ -50,7 +49,7 @@ if (is_array($match)) {
 } else {
 
 
-    $controller = new Controller();
+    $controller = new Nathel\Controller();
     $controller->error();
 
 }

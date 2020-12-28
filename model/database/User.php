@@ -27,7 +27,6 @@ class User extends Dbh
         $this->id = $id;
 
         $user = $this->getUser();
-
         $this->name = $user['name'];
         $this->email = $user['email'];
         $this->thumbnail = $user['thumbnail'];
@@ -40,7 +39,6 @@ class User extends Dbh
         $this->a = $user['a'];
         $this->created_at = $user['created_at'];
         $this->updated_at = $user['updated_at'];
-        
     }
 
 
@@ -68,7 +66,7 @@ class User extends Dbh
         $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public function getUserScores(Mappool $mappool): array

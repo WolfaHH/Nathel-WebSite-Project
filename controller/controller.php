@@ -1,11 +1,8 @@
 <?php
 
 namespace Nathel;
-require 'Autoloader.php';
 
-require 'Autoloader.php';
-
-class Controller extends Autoloader
+class Controller
 {
 
     protected static function updateSession()
