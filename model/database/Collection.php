@@ -13,9 +13,9 @@ class Collection extends Dbh
     public $updated_at;
 
 
-    public function __construct($mappool_id)
+    public function __construct($collection_id)
     {
-        $this->id = $mappool_id;
+        $this->id = $collection_id;
         $collection = $this->getCollection();
         $this->name = $collection['name'];
         $this->thumbnail = $collection['thumbnail'];
@@ -31,7 +31,7 @@ class Collection extends Dbh
         $stmt = self::connectToDb()->prepare('SELECT * FROM collections WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public function getCollectionMappools(): array
@@ -74,7 +74,7 @@ class Collection extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getCollectionTag($id): array
+    public function getCollectionTag(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM collection_tags WHERE collection_id = :collection_id AND tag_id = :tag_id');
         $stmt->bindParam(':collection_id', $this->id);

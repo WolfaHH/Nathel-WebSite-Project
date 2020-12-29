@@ -27,7 +27,6 @@ class User extends Dbh
         $this->id = $id;
 
         $user = $this->getUser();
-
         $this->name = $user['name'];
         $this->email = $user['email'];
         $this->thumbnail = $user['thumbnail'];
@@ -67,7 +66,7 @@ class User extends Dbh
         $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public function getUserScores(Mappool $mappool): array
@@ -75,6 +74,14 @@ class User extends Dbh
         $stmt = self::connectToDb()->prepare('SELECT * FROM user_scores us INNER JOIN mappool_maps mm ON us.mappool_map_id = mm.id WHERE us.user_id = :user_id AND mm.id = :mappool_id');
         $stmt->bindParam(':user_id', $this->id);
         $stmt->bindParam(':mappool_id', $mappool->id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getUserRecentPlay(): array
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM user_scores us INNER JOIN mappool_maps mm ON us.mappool_map_id = mm.id WHERE us.user_id = :user_id LIMIT 10');
+        $stmt->bindParam(':user_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -109,6 +116,15 @@ class User extends Dbh
         $stmt->bindParam(':user_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    public function getUserFollow(Mappool $mappool): array
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_followed WHERE user_id = :user_id AND mappool_id = :mappool_id  ');
+        $stmt->bindParam(':user_id', $this->id);
+        $stmt->bindParam(':mappool_id', $mappool->id);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 
     public function getUserFollowedMappools(): array
