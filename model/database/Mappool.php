@@ -38,18 +38,16 @@ class Mappool extends Dbh{
         return $stmt->fetch();
     }
 
-    public static function GetMostPopular($nb)
+    public static function GetMostPopular()
     {
-        $stmt = self::connectToDb()->prepare('SELECT * FROM mappools ORDER BY follow DESC LIMIT :nb');
-        $stmt->bindParam(':nb',$nb);
+        $stmt = self::connectToDb()->prepare('SELECT * FROM mappools ORDER BY follow DESC LIMIT 5');
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public static function GetMostRecent($nb)
+    public static function GetMostRecent()
     {
-        $stmt = self::connectToDb()->prepare('SELECT * FROM mappools ORDER BY created_at LIMIT :nb');
-        $stmt->bindParam(':nb',$nb);
+        $stmt = self::connectToDb()->prepare('SELECT * FROM mappools ORDER BY created_at LIMIT 5');
         $stmt->execute();
         return $stmt->fetchAll();
 
