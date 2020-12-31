@@ -6,52 +6,31 @@ namespace Nathel;
 
 class HomeController extends Controller
 {
-    protected function setDisplayPools()
+    protected function setMappools()
     {
-        include 'model/database/Mappool.class.php';
 
-        $data = new Mappool();
+        $popular = Mappool::GetMostPopular();
+        $recent = Mappool::GetMostRecent();
 
-        $popular = $data->GetMostPopular();
-        $recent = $data->GetMostRecent();
-        var_dump($popular);
+        $mappools = [$popular, $recent];
 
-        foreach ($popular as $key => $value ):
-            $maps = $data->GetMapsFromMappool($popular['id']);
-            $collection_name = $data->GetCollectionInfoFromAPool($value['collection_id']);
-            $display_pools[$key] = [
-                'name' => $value['name'],
-                'from' => $collection_name,
-                'submitter' => $value['submitter'],
-                'nb_map' => $data->GetNbMaps(),
-                'categories' => [
-                    'category' =>,
-            'rank_range' =>,
-            'custom_tags' =>,
-        ]
-            ];
-
-        endforeach; //Tableau à finir
-
-        return $display_pools;
+        return $mappools;
 
     }
-    protected function showDisplayPools()
+    protected function showMappools()
     {
-        $display_pools = $this->setDisplayPools;
-        $displayname1 = 'Most popular mappools';
-        $displayname2 = 'Most recent mappools';
-        $max = 4;
-        MappoolView::show($display_pools, $displayname1, $displayname2, $max);
+        $mappools = $this->setMappools();
+        MappoolView::section($mappools[0], 'Most popular mappools');
+        MappoolView::section($mappools[1], 'Most recent mappools');
 
     }
 
     public function showHome()
     {
         View::header();
-        include 'view/elements/home/jumbotron.php';
-        $this->showDisplayPools();
-        include 'view/elements/home/aftertron.php';
+        include '../view/elements/home/jumbotron.php';
+        $this->showMappools();
+        include '../view/elements/home/aftertron.php';
         View::footer();
 
     }
