@@ -42,6 +42,14 @@ class Map extends Dbh{
         return $stmt->fetchAll();
     }
 
+    public static function getMapbyscore($mappool_map_id)
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_maps mm INNER JOIN beatmaps b on mm.map_id = b.id INNER JOIN beatmapsets b2 on b.beatmapset_id = b2.id WHERE mm.id = :mappool_map_id');
+        $stmt->bindParam(':mappool_map_id', $mappool_map_id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public function GetBeatmapset()
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM beatmapsets WHERE id = :id');
