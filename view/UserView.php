@@ -9,6 +9,9 @@ class UserView extends View
 
     public static function banner(User $user)
     {
+        $submitted = $user->getUserMappools();
+        $completed = $user->getUserCompletedMappool();
+        $follow = $user->getUserFollows();
         require '../view/elements/user/banner.php';
     }
 

@@ -118,6 +118,14 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
+    public function getUserCompletedMappool(): array
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_followed WHERE user_id = :user_id AND complete = 1');
+        $stmt->bindParam(':user_id', $this->id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function getUserFollow(Mappool $mappool): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_followed WHERE user_id = :user_id AND mappool_id = :mappool_id  ');
