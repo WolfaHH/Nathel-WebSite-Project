@@ -26,6 +26,8 @@ class Controller
     {
         require('../view/template/404.php');
     }
+
+    public function
 }
 
 

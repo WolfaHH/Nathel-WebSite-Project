@@ -25,6 +25,7 @@ class Autoloader
                 require '../model/database/' . $class_name . '.php';
 
             }
+
         }
     }
 

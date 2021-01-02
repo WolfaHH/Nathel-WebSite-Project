@@ -38,6 +38,8 @@ class Mappool extends Dbh{
         return $stmt->fetch();
     }
 
+
+
     public static function GetMostPopular()
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappools ORDER BY follow DESC LIMIT 5');
@@ -56,6 +58,14 @@ class Mappool extends Dbh{
     public function GetMaps()
     {
         $stmt = $this->connectToDb()->prepare('SELECT * FROM mappool_maps WHERE mappool_id = :mappool_id ORDER BY mode');
+        $stmt->bindParam(':mappool_id', $this->id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function GetNbMaps()
+    {
+        $stmt = $this->connectToDb()->prepare('SELECT COUNT(*) FROM mappool_maps WHERE mappool_id = :mappool_id ORDER BY mode');
         $stmt->bindParam(':mappool_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();
