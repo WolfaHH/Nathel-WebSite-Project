@@ -9,7 +9,7 @@ class MappoolView extends View
     // USED ON HOME AND USER PAGES
     public static function show(Mappool $mappool)
     {
-        if (isset($_SESSION)){
+        if (isset($_SESSION['user'])){
             $is_follow = $_SESSION['user']->getUserFollow($mappool);
         }
 

@@ -15,12 +15,13 @@ class ManagePoolsController extends Controller
             $this->error();
             die();
         }*/
-        // Ce qui marche pour des tests ; 
+        // Ce qui marche pour des tests ;
         return new User(2);
     }
 
     public function showManagePools()
     {
+        Controller::storeURI();
         // traitement de donnée
         self::updateSession();
 

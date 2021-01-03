@@ -9,8 +9,8 @@ class HomeController extends Controller
     protected function setMappools()
     {
 
-        $popular = Mappool::GetMostPopular();
-        $recent = Mappool::GetMostRecent();
+        $popular = \Nathel\Mappool::GetMostPopular();
+        $recent = \Nathel\Mappool::GetMostRecent();
 
         $mappools = [$popular, $recent];
 
@@ -27,6 +27,8 @@ class HomeController extends Controller
 
     public function showHome()
     {
+        Controller::storeURI();
+        ConnexionController::verif_login_page();
         View::header();
         include '../view/elements/home/jumbotron.php';
         $this->showMappools();

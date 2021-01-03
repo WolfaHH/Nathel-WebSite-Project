@@ -4,6 +4,11 @@ require '../vendor/autoload.php';
 require '../controller/Autoloader.php';
 \Nathel\Autoloader::Register();
 
+if (!isset($_SESSION['OsuApi'])){
+    $_SESSION['OsuApi'] = new \Nathel\OsuApi();
+}
+
+\Nathel\ConnexionController::verif_login_page($_SESSION['OsuApi']);
 
 
 
@@ -18,6 +23,7 @@ $router->map('GET', '/user/[i:id]', 'user', 'user');
 $router->map('GET', '/user/update/[i:id]', 'userUpdate', 'userUpdate');
 $router->map('GET', '/collection/[i:id]', 'collection', 'collection');
 $router->map('GET', '/managemypools', 'managemypools', 'managemypools');
+$router->map('GET', '/connexion', 'connexion', 'connexion');
 
 $match = $router->match();
 
@@ -27,6 +33,7 @@ if (is_array($match)) {
     $params = $match['params'];
     var_dump($params);
 
+
     if ($match['target'] === 'user') {
         $controller = new Nathel\UserController();
         $controller->showUser($params);
@@ -34,7 +41,7 @@ if (is_array($match)) {
 
     if ($match['target'] === 'userUpdate') {
         $controller = new Nathel\UserController();
-        $controller->Update();
+        $controller->Update(); // a f aire
     }
 
     if ($match['target'] === 'home') {
@@ -42,13 +49,19 @@ if (is_array($match)) {
         $controller->showHome();
     }
     if ($match['target'] === 'collection') {
+
         $controller = new Nathel\CollectionController();
         $controller->showCollectionPage($params);
     }
 
     if ($match['target'] === 'managemypools') {
+
         $controller = new Nathel\ManagePoolsController();
         $controller->showManagePools();
+    }
+    if ($match['target'] === 'connexion') {
+
+        \Nathel\ConnexionController::login_button();
     }
 
 
@@ -60,9 +73,5 @@ if (is_array($match)) {
     }
 */
 } else {
-
-
-    $controller = new Nathel\Controller();
-    $controller->error();
-
+    \Nathel\Controller::error();
 }

@@ -4,8 +4,7 @@
 namespace Nathel;
 
 
-
-abstract class Connexion extends Controller
+abstract class ConnexionController extends Controller
 {
     private static function connect_user()
     {
@@ -20,7 +19,7 @@ abstract class Connexion extends Controller
         $OsuApi = $_SESSION['OsuApi'];
         $api = $OsuApi->getOwnUserInfo($_SESSION['token']);
         $id = $api['user_id'];
-        if ((User::checkUser($id)) == False){
+        if ((User::checkUser($id)) == False) {
 
             //make data user and store user
             $data = array();
@@ -32,7 +31,7 @@ abstract class Connexion extends Controller
         $_SESSION['user'] = new User($tmp['user_id']);
 
         $ch = $_SESSION['REQUEST_URI'];
-        header('Location: '.$ch);
+        header('Location: ' . $ch);
 
     }
 
@@ -40,11 +39,12 @@ abstract class Connexion extends Controller
     {
         if (isset($_SESSION['user'])) {
             Controller::updateSession();
-        } elseif ($_COOKIE['token_user']) {
+        } elseif (isset($_COOKIE['token_user'])) {
             $_SESSION['$token_user'] = $_COOKIE['token_user'];
             $_SESSION['refresh_token_user'] = $_COOKIE['$refresh_token_user'];
             self::connect_user();
         }
     }
+
 
 }

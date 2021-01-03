@@ -4,6 +4,7 @@
 namespace Nathel;
 
 
+
 class User extends Dbh
 {
 
@@ -63,6 +64,14 @@ class User extends Dbh
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public static function checkUser($id): array
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE id = :id');
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch();
     }

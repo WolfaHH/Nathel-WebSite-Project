@@ -2,7 +2,7 @@
 
 namespace Nathel;
 
-class Controller
+Abstract class Controller
 {
 
     protected static function updateSession()
@@ -12,17 +12,12 @@ class Controller
         }
     }
 
-    public function home()
-    {
-        require('home.php');
+    protected static function storeURI(){
+        $_SESSION['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
+
     }
 
-    public function mappools()
-    {
-        require('mappools.php');
-    }
-
-    public function error()
+    public static function error()
     {
         require('../view/template/404.php');
     }

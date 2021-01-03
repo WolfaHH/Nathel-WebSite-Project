@@ -2,6 +2,7 @@
 
 namespace Nathel;
 
+
 class Mappool extends Dbh{
 
     public $id;

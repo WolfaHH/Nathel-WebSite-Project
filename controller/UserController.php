@@ -20,6 +20,8 @@ class UserController extends Controller
 
     public function showUser($params)
     {
+        Controller::storeURI();
+
         // traitement de donnée
         self::updateSession();
 

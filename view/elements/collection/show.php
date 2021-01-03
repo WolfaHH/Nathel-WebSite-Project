@@ -2,7 +2,7 @@
     <h3 class="card-title"><?= $collection->name ?></h3>
 
 
-    <span class="nb-maps"><?= $Nb_mappools ?> Nb_mappools</span>
+    <span class="nb-maps"><?= $Nb_maps ?> Nb_mappools</span>
 
     <div class="mappool-tags">
         <?php foreach ($tags as $tag) : ?>
@@ -17,12 +17,10 @@
         $contributors
     </div>
 
-    Bouton Edit
-
-    Bouton supprimer
 
     <div>
 
     </div>
 
 </article>
+

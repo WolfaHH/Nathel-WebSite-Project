@@ -2,6 +2,7 @@
 
 namespace Nathel;
 
+
 use \PDO;
 
 class Dbh {

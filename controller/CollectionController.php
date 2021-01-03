@@ -23,6 +23,7 @@ class CollectionController extends Controller
 
     public function showCollectionPage($params)
     {
+        Controller::storeURI();
         $this->collection = new Collection($params['id']);
         $this->mappools = $this->collection->getCollectionMappools();
 
