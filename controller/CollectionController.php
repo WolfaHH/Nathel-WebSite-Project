@@ -4,7 +4,7 @@
 namespace Nathel;
 
 
-class HomeController extends Controller
+class CollectionController extends Controller
 {
     public $collection;
     public $mappools;
@@ -17,13 +17,13 @@ class HomeController extends Controller
 
     protected function showMappools()
     {
-        MappoolView::showV2($this->mappools);
+        MappoolView::sectionV2($this->mappools);
 
     }
 
-    public function showCollectionPage()
+    public function showCollectionPage($params)
     {
-        $this->collection = new Collection($_GET['collection_id']);
+        $this->collection = new Collection($params['id']);
         $this->mappools = $this->collection->getCollectionMappools();
 
         View::header();

@@ -36,7 +36,7 @@ class Collection extends Dbh
 
     public function getCollectionMappools(): array
     {
-        $stmt = self::connectToDb()->prepare('SELECT * FROM mappools WHERE collection_id = :collection_id');
+        $stmt = self::connectToDb()->prepare('SELECT id FROM mappools WHERE collection_id = :collection_id');
         $stmt->bindParam(':collection_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();

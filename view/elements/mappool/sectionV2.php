@@ -4,7 +4,7 @@
 
     foreach ($mappools as $mappool_user) {
         var_dump($mappool_user);
-        $mappool = new \Nathel\Mappool($mappool_user);
+        $mappool = new \Nathel\Mappool($mappool_user['id']);
 
         \Nathel\MappoolView::show($mappool);
     }

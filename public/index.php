@@ -14,6 +14,7 @@ $router->map('GET', '/contact', 'contact', 'contact');
 $router->map('GET', '/blog/[*:slug]-[i:id]', 'blog/article', 'article');
 $router->map('GET', '/user/[i:id]', 'user', 'user');
 $router->map('GET', '/user/update/[i:id]', 'userUpdate', 'userUpdate');
+$router->map('GET', '/collection/[i:id]', 'collection', 'collection');
 
 $match = $router->match();
 
@@ -36,6 +37,10 @@ if (is_array($match)) {
     if ($match['target'] === 'home') {
         $controller = new Nathel\HomeController();
         $controller->showHome();
+    }
+    if ($match['target'] === 'collection') {
+        $controller = new Nathel\CollectionController();
+        $controller->showCollectionPage($params);
     }
 
 
