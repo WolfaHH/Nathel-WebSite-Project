@@ -1,9 +1,11 @@
 <?php
-
 require '../vendor/autoload.php';
 
 require '../controller/Autoloader.php';
 \Nathel\Autoloader::Register();
+
+
+
 
 
 $uri = $_SERVER['REQUEST_URI'];
@@ -15,6 +17,7 @@ $router->map('GET', '/blog/[*:slug]-[i:id]', 'blog/article', 'article');
 $router->map('GET', '/user/[i:id]', 'user', 'user');
 $router->map('GET', '/user/update/[i:id]', 'userUpdate', 'userUpdate');
 $router->map('GET', '/collection/[i:id]', 'collection', 'collection');
+$router->map('GET', '/managemypools', 'managemypools', 'managemypools');
 
 $match = $router->match();
 
@@ -41,6 +44,11 @@ if (is_array($match)) {
     if ($match['target'] === 'collection') {
         $controller = new Nathel\CollectionController();
         $controller->showCollectionPage($params);
+    }
+
+    if ($match['target'] === 'managemypools') {
+        $controller = new Nathel\ManagePoolsController();
+        $controller->showManagePools();
     }
 
 

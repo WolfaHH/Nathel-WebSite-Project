@@ -9,7 +9,6 @@ class User extends Dbh
 
     public $id;
     public $name;
-    public $email;
     public $thumbnail;
     public $country;
     public $rank;
@@ -28,7 +27,6 @@ class User extends Dbh
 
         $user = $this->getUser();
         $this->name = $user['name'];
-        $this->email = $user['email'];
         $this->thumbnail = $user['thumbnail'];
         $this->country = $user['country'];
         $this->rank = $user['rank'];

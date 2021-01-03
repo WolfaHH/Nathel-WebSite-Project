@@ -33,5 +33,8 @@ class HomeController extends Controller
         include '../view/elements/home/aftertron.php';
         View::footer();
 
+
+
+
     }
 }

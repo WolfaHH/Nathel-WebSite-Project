@@ -25,5 +25,28 @@ class CollectionView extends View
         require '../view/elements/collection/show.php';
     }
 
+    public static function showV2(Collection $collection)
+    {
+        if (isset($_SESSION)){
+            $is_follow = $_SESSION['user']->getUserFollow($collection);
+        }
+        $Nb_mappools = 0;
+        foreach($collection->getCollectionMappools() as $key):
+            $Nb_mappools += 1;
+        endforeach;
+
+        $tags = $collection->getCollectionTags();
+
+        $contributors = $collection->getCollectionContributors();
+
+        require '../view/elements/collection/showV2.php';
+    }
+
+    public static function sectionV2($collections)
+    {
+
+        require '../view/elements/collection/sectionV2.php';
+    }
+
 
 }
