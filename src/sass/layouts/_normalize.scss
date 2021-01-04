@@ -1,0 +1,27 @@
+body{
+  font-size: 100%;
+  font-family: sans-serif;
+  background-color: $dark;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+
+  ul{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+
+  }
+
+  a{
+
+    text-decoration: none;
+
+  }
+}
+
+*:focus {
+  outline: none;
+}

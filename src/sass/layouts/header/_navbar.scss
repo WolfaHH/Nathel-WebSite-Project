@@ -1,0 +1,77 @@
+.navbar{
+  background-color: $light;
+  position: fixed;
+  bottom: 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  box-shadow: 0 -1px 2px 1px rgb(0, 0, 0, 0.25);
+
+  ul{
+    display: flex;
+    margin: auto;
+
+    .nav-item{
+
+      flex: 1 1 auto;
+      text-align: center;
+      flex-basis: 0;
+      flex-grow: 1;
+      display: block;
+      padding: .5em 0 0 0;
+
+      &:after{
+
+        content: '';
+        display: block;
+        margin: auto;
+        height: 3px;
+        border-radius: $light-border;
+        width: 0;
+        background-color: transparent;
+        transition: width .5s ease, background-color .5s ease;
+
+      }
+
+      .nav-link{
+
+        color: $secondary;
+        display: grid;
+        grid-template-areas:
+        "svg"
+        "text";
+
+        .svg{
+          fill: $secondary;
+          margin: auto;
+          width: 33px;
+          height: 33px;
+          grid-area: svg;
+        }
+
+        .text{
+          grid-area: text;
+        }
+      }
+
+      &:hover{
+
+        &:after{
+
+          width: 70%;
+          background-color: $primary;
+          transition: width .5s ease, background-color .5s ease;
+
+        }
+
+        .nav-link{
+          color: $primary;
+
+          .svg{
+            fill: $primary;
+          }
+        }
+      }
+    }
+  }
+}

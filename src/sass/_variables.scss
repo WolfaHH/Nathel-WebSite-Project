@@ -1,0 +1,65 @@
+//osu - colors
+
+$primary : #2299BB;
+$secondary : #fff;
+$pink : #ff66aa;
+$purple : #AA88FF;
+$yellow : #FFCC22;
+$green : #88B300;
+$black : #121415;
+$red : #BB2222;
+$gray : #C4C4C4;
+
+
+// background - colors
+
+$dark : #171A1C;
+$classic : #22282A;
+$light : #2E3538;
+
+
+// mods - colors
+
+$dark-nm : #1A1A1A;
+$light-nm : #666666;
+
+$dark-hd : #5A581D;
+$light-hd : #7F6000;
+
+$dark-hr : #5A1D1D;
+$light-hr : #660000;
+
+$dark-dt : #35194A;
+$light-dt : #351C75;
+
+$dark-fm : #192D4A;
+$light-fm : #073763;
+
+
+$dark-tb : #214D2A;
+$dark-tb : #274E13;
+
+
+// border-radius
+
+$light-border : 10px;
+$strong-border : 20px;
+
+
+// shadow
+
+$shadow : 0 1px 3px rgb(0, 0, 0, .25);
+
+
+// typo
+
+$small : 0.5em;
+$medium : 1em;
+$large : 1.5em;
+$extra-large : 2em;
+$largest : 2.5em;
+
+// breakpoints
+
+$breakpoint-sm : 600px;
+$breakpoint-md : 1024px;

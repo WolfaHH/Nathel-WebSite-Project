@@ -1,4 +1,13 @@
-
+//toutes les variables nécessaires
 @import "variables";
 
-@import "components/btn";
+// tout les petits composants
+@import "components/display";
+
+// @import "components/btn";
+
+
+// tout les gros éléments
+@import "layouts/normalize";
+@import "layouts/header/navbar";
+@import "layouts/header/search-bar";
