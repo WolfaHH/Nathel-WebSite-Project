@@ -1,4 +1,156 @@
+.d-none {
+  display: none;
+}
+
 body {
-  color: red;
+  font-size: 100%;
+  font-family: sans-serif;
+  background-color: #171A1C;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+body ul {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+body a {
+  text-decoration: none;
+}
+
+*:focus {
+  outline: none;
+}
+
+.navbar {
+  background-color: #2E3538;
+  position: fixed;
+  bottom: 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  box-shadow: 0 -1px 2px 1px rgba(0, 0, 0, 0.25);
+}
+
+.navbar ul {
+  display: flex;
+  margin: auto;
+}
+
+.navbar ul .nav-item {
+  flex: 1 1 auto;
+  text-align: center;
+  flex-basis: 0;
+  flex-grow: 1;
+  display: block;
+  padding: 0.5em 0 0 0;
+}
+
+.navbar ul .nav-item:after {
+  content: "";
+  display: block;
+  margin: auto;
+  height: 3px;
+  border-radius: 10px;
+  width: 0;
+  background-color: transparent;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+.navbar ul .nav-item .nav-link {
+  color: #fff;
+  display: grid;
+  grid-template-areas: "svg" "text";
+}
+
+.navbar ul .nav-item .nav-link .svg {
+  fill: #fff;
+  margin: auto;
+  width: 33px;
+  height: 33px;
+  grid-area: svg;
+}
+
+.navbar ul .nav-item .nav-link .text {
+  grid-area: text;
+}
+
+.navbar ul .nav-item:hover:after {
+  width: 70%;
+  background-color: #2299BB;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+.navbar ul .nav-item:hover .nav-link {
+  color: #2299BB;
+}
+
+.navbar ul .nav-item:hover .nav-link .svg {
+  fill: #2299BB;
+}
+
+.search-mobile {
+  display: grid;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  background: #2299BB;
+  color: #fff;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "logo search btn";
+}
+
+.search-mobile .header-logo {
+  grid-area: logo;
+  width: 30px;
+  padding: 5px 0;
+  margin-left: 0.5em;
+}
+
+.search-mobile .search {
+  grid-area: search;
+}
+
+.search-mobile .btn-search {
+  grid-area: btn;
+}
+
+.search {
+  background: rgba(0, 0, 0, 0.33);
+  border-radius: 20px;
+  margin: 0.7em 1em;
+  border: none;
+  padding: 0 1em;
+  min-width: 100px;
+}
+
+.search::-moz-placeholder {
+  color: #22282A;
+}
+
+.search:-ms-input-placeholder {
+  color: #22282A;
+}
+
+.search::placeholder {
+  color: #22282A;
+}
+
+.btn-search {
+  background: none;
+  border: none;
+  fill: #fff;
+  margin-right: 0.5em;
 }
 

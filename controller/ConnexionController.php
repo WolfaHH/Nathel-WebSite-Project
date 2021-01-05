@@ -17,8 +17,10 @@ abstract class ConnexionController extends Controller
     {
         // Fonction verif token_user not expired
         $OsuApi = $_SESSION['OsuApi'];
+        $_SESSION['token'] = $OsuApi->getToken($_GET['code']);
+
         $api = $OsuApi->getOwnUserInfo($_SESSION['token']);
-        $id = $api['user_id'];
+        $id = $api['id'];
         if ((User::checkUser($id)) == False) {
 
             //make data user and store user

@@ -8,6 +8,7 @@ class UserController extends Controller
 {
     protected function setUser($params)
     {
+
         if (isset($params['id'])) {
             return new User($params['id']);
         } else if (isset($_SESSION['user'])) {
@@ -20,21 +21,22 @@ class UserController extends Controller
 
     public function showUser($params)
     {
+
         Controller::storeURI();
 
         // traitement de donnée
         self::updateSession();
 
         $user = $this->setUser($params);
+
         // appel visuel de la page
         View::header();
-
+        echo 'flag';
         UserView::banner($user);
 
         UserView::activity($user);
 
         $mappools = $user->getUserMappools();
-        var_dump($mappools);
         MappoolView::section($mappools, 'submited Mappools');
 
         $mappools = $user->getUserFollowedMappools();

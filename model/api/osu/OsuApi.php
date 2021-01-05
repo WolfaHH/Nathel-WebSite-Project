@@ -7,13 +7,13 @@ class OsuApi
 {
     const CLIENT_ID = 4227;
     const SECRET = 'kB9lkO0UUgvjdOmizgHUE5FJdM1d6JpTCJG0UFGr';
-    const URI = 'http://localhost/Mappool-website-project/model/api/osu/OsuApi.php';
+    const URI = 'http://mappool-website-project.nath/connexion';
 
     protected $current_credentials_token;
     protected $user_token;
 
 
-    public function getToken($code)
+    public function getToken($code=null)
     {
         // Method that get a token code
         $curl = curl_init();
@@ -69,7 +69,11 @@ class OsuApi
     {
         // GET template for queries in the api
         $curl = curl_init();
-        $url = $endpoint . '?' . http_build_query($params);
+        $url = $endpoint;
+        if ($params !== null){
+            $url.= '?' . http_build_query($params);
+        }
+
         $tokenused = $token == 1 ? $this->user_token : $this->current_credentials_token;
 
         $header_tmp = array(
@@ -113,8 +117,10 @@ class OsuApi
 
     public function getOwnUserInfo($token_user) //Only used for Oauth user_id verification
     {
+        $this->user_token = $_SESSION['token'];
+
         $endpoint = 'https://osu.ppy.sh/api/v2/me/osu';
-        return self::apiQueryGET($token=1, $endpoint);
+        var_dump(self::apiQueryGET($token=1, $endpoint));
     }
 
     public function getUserRecentActivity($user_id, $limit=12, $offset=1)

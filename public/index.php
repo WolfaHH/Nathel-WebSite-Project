@@ -6,6 +6,7 @@ require '../controller/Autoloader.php';
 
 if (!isset($_SESSION['OsuApi'])){
     $_SESSION['OsuApi'] = new \Nathel\OsuApi();
+
 }
 
 \Nathel\ConnexionController::verif_login_page($_SESSION['OsuApi']);
@@ -31,7 +32,7 @@ $match = $router->match();
 if (is_array($match)) {
 
     $params = $match['params'];
-    var_dump($params);
+    //var_dump($params);
 
 
     if ($match['target'] === 'user') {

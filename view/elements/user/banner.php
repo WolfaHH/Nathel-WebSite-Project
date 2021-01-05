@@ -1,9 +1,4 @@
-<?php
 
-
-
-
-?>
 
 <section class="profile-jumbotron" style="background: url('<?= $user->banner ?>')">
     <div>

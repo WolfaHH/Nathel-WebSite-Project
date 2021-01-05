@@ -4,8 +4,7 @@
     <?php
 
     foreach ($mappools as $mappool_user) {
-        echo "bla";
-        var_dump($mappool_user);
+
         $mappool = new \Nathel\Mappool($mappool_user);
 
         \Nathel\MappoolView::show($mappool);

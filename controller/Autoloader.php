@@ -7,7 +7,6 @@ class Autoloader
 
     private static function loader($class)
     {
-        var_dump($class);
         if (strpos($class, __NAMESPACE__ . '\\') === 0) {
 
             $class_name = str_replace(__NAMESPACE__ . '\\', '', $class); // on vire le namespace pour require seulement le fichier de l'objet

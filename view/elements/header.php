@@ -1,3 +1,5 @@
+<h1>HEADER</h1>
+<!--
 <!doctype html>
 <html lang=fr>
 <head>
@@ -90,6 +92,7 @@
     </form>
 
 </header>
+-->
 
 
 
