@@ -9,6 +9,7 @@ class User extends Dbh
 {
 
     public $id;
+    public $osu_id;
     public $name;
     public $thumbnail;
     public $country;
@@ -24,9 +25,10 @@ class User extends Dbh
 
     public function __construct($id)
     {
-        $this->id = $id;
 
+        $this->osu_id = $id;
         $user = $this->getUser();
+        $this->id = $user['id'];
         $this->name = $user['name'];
         $this->thumbnail = $user['thumbnail'];
         $this->country = $user['country'];
@@ -62,15 +64,15 @@ class User extends Dbh
 
     public function getUser(): array
     {
-        $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE id = :id');
-        $stmt->bindParam(':id', $this->id);
+        $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE osu_id = :id');
+        $stmt->bindParam(':id', $this->osu_id);
         $stmt->execute();
         return $stmt->fetch();
     }
 
-    public static function checkUser($id): array
+    public static function checkUser($id)
     {
-        $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE id = :id');
+        $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE osu_id = :id');
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch();
@@ -150,18 +152,20 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-
+// PENSER A ADD PHOTO PROFILE DANS BDD USER
 
     public static function storeUser($data)
     {
-        $stmt = self::connectToDb()->prepare('INSERT INTO users (name, email, password, thumbnail, `rank`, country) VALUES (:name, :email, :password, :thumbnail, :rank, :country)');
-        $stmt->bindParam(':name', $data['name']);
-        $stmt->bindParam(':email', $data['email']);
+        $stmt = self::connectToDb()->prepare('INSERT INTO users (nam, password, thumbnail, rank, country, osu_id, cover) VALUES (:nam, :password, :thumbnail, :rank, :country, :osu_id, :cover)');
+        $stmt->bindParam(':nam', $data['name']);
         $stmt->bindParam(':password', $data['password']);
         $stmt->bindParam(':thumbnail', $data['thumbnail']);
         $stmt->bindParam(':rank', $data['rank']);
         $stmt->bindParam(':country', $data['country']);
+        $stmt->bindParam(':osu_id', $data['osu_id']);
+        $stmt->bindParam(':cover', $data['cover']);
         $stmt->execute();
+        var_dump($stmt);
     }
 
     public function storeUserFollow($mappool_id)

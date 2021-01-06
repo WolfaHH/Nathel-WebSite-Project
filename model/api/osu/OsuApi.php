@@ -49,13 +49,14 @@ class OsuApi
         ));
 
         $response = curl_exec($curl);
-
         curl_close($curl);
+        $response = json_decode($response, true);
+
 
         if ($code==null): // Public Token
             $this->current_credentials_token = $response;
         else: // User authentification token
-            return $response;
+            return $response['access_token'];
         endif;
 
     }
@@ -100,7 +101,8 @@ class OsuApi
         $response = curl_exec($curl);
 
         curl_close($curl);
-        return $response;
+        return json_decode($response, true);
+
     }
 
 
@@ -110,17 +112,16 @@ class OsuApi
 
     public function GetUserInfo(int $user_id)
     {
-
         $endpoint = "https://osu.ppy.sh/api/v2/users/".$user_id;
         return self::apiQueryGET($token=0, $endpoint);
     }
 
     public function getOwnUserInfo($token_user) //Only used for Oauth user_id verification
     {
-        $this->user_token = $_SESSION['token'];
+        $this->user_token = $token_user;
 
         $endpoint = 'https://osu.ppy.sh/api/v2/me/osu';
-        var_dump(self::apiQueryGET($token=1, $endpoint));
+        return self::apiQueryGET($token=1, $endpoint);
     }
 
     public function getUserRecentActivity($user_id, $limit=12, $offset=1)
