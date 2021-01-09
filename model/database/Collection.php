@@ -182,5 +182,79 @@ class Collection extends Dbh
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
     }
+
+    //Search bar query :
+
+
+    public static function getMostPopular()
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM mappools mp INNER JOIN collections cl ON mp.collection_id = cl.id ORDER BY mp.follow');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
+    public static function P($E)
+    {
+        $P = array();
+        $i = 0;
+        $max_i = 2**(count($E))-1;
+
+        while ($i <= $max_i){
+            $s = array();
+            $j = 0;
+            $max_j = count($E)-1;
+            while ($j <= $max_j){
+                if (($i>>$j)&1 == 1){
+                    array_push($s, $E[$j]);
+                }
+                $j+=1;
+            }
+
+            array_push($P, $s);
+            $i+=1;
+        }
+
+        return $P;
+    }
+
+    public static function searchCollectionsWithName($mots)
+    {
+        $queries = self::P($mots);
+        $collections = array();
+        foreach ($queries as $query){
+            $s = "";
+            if (count($query)>1){
+                for($i = 1; $i<count($query);$i++){
+                    $s.= ' AND "%'.$query[$i].'%"';
+                }
+            }
+            $q = "%".$query[0]."%";
+            $stmt = self::connectToDb()->prepare('SELECT * FROM collections WHERE name LIKE :mot1 :suite');
+            $stmt->bindParam(':mot1', $q);
+            $stmt->bindParam(':suite', $s);
+            $stmt->execute();
+            $tmp = $stmt->fetchAll();
+            if (count($query) == 1){ $tmp['Valeur'] = 1;}
+            if (count($query) == 2){ $tmp['Valeur'] = 2;}
+            if (count($query) == 3){ $tmp['Valeur'] = 3;}
+            if (count($query) == 4){ $tmp['Valeur'] = 4;}
+            if (count($query) >= 5){ $tmp['Valeur'] = 5;}
+            $collections = array_merge($collections, $tmp);
+        }
+        return $collections;
+    }
+    // fonctions pour contributeur ; requete : SELECT * FROM contributors cb INNER JOIN collections cl ON cb.collection_id = cl.id WHERE cb.user_id = X
+
+    public static function searchCollectionWithContributors($mots)
+    {
+        foreach ($mots as $mot){
+            $stmt = self::connectToDb()->prepare('SELECT * FROM contributors cb INNER JOIN collections cl ON cb.collection_id = cl.id WHERE cb.user_id = :id');
+            $stmt->bindParam(':mot1', $mot);
+            $stmt->execute();
+            $tmp = $stmt->fetchAll();
+        }
+    }
+
 }
 

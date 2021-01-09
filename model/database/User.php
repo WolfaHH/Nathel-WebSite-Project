@@ -12,6 +12,7 @@ class User extends Dbh
     public $osu_id;
     public $name;
     public $thumbnail;
+    public $cover;
     public $country;
     public $rank;
     public $silver_ss;
@@ -31,6 +32,7 @@ class User extends Dbh
         $this->id = $user['id'];
         $this->name = $user['name'];
         $this->thumbnail = $user['thumbnail'];
+        $this->cover = $user['cover'];
         $this->country = $user['country'];
         $this->rank = $user['rank'];
         $this->silver_ss = $user['silver_ss'];
@@ -135,7 +137,7 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getUserFollow(Mappool $mappool): array
+    public function getUserFollow(Mappool $mappool)
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_followed WHERE user_id = :user_id AND mappool_id = :mappool_id  ');
         $stmt->bindParam(':user_id', $this->id);
@@ -152,11 +154,11 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-// PENSER A ADD PHOTO PROFILE DANS BDD USER
+
 
     public static function storeUser($data)
     {
-        $stmt = self::connectToDb()->prepare('INSERT INTO users (nam, password, thumbnail, rank, country, osu_id, cover) VALUES (:nam, :password, :thumbnail, :rank, :country, :osu_id, :cover)');
+        $stmt = self::connectToDb()->prepare('INSERT INTO users (name, thumbnail, rank, country, osu_id, cover, password) VALUES (:nam, :thumbnail, :rank, :country, :osu_id, :cover, :password)');
         $stmt->bindParam(':nam', $data['name']);
         $stmt->bindParam(':password', $data['password']);
         $stmt->bindParam(':thumbnail', $data['thumbnail']);
@@ -165,7 +167,6 @@ class User extends Dbh
         $stmt->bindParam(':osu_id', $data['osu_id']);
         $stmt->bindParam(':cover', $data['cover']);
         $stmt->execute();
-        var_dump($stmt);
     }
 
     public function storeUserFollow($mappool_id)

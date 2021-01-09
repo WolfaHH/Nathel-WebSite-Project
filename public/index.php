@@ -1,15 +1,18 @@
 <?php
-require '../vendor/autoload.php';
 
+
+require '../vendor/autoload.php';
 require '../controller/Autoloader.php';
 \Nathel\Autoloader::Register();
+session_start();
 
-if (!isset($_SESSION['OsuApi'])){
+
+if (isset($_SESSION['OsuApi']) === False){
+    echo'test';
     $_SESSION['OsuApi'] = new \Nathel\OsuApi();
-
 }
 
-\Nathel\ConnexionController::verif_login_page($_SESSION['OsuApi']);
+\Nathel\ConnexionController::verif_login_page();
 
 
 
@@ -25,6 +28,7 @@ $router->map('GET', '/user/update/[i:id]', 'userUpdate', 'userUpdate');
 $router->map('GET', '/collection/[i:id]', 'collection', 'collection');
 $router->map('GET', '/managemypools', 'managemypools', 'managemypools');
 $router->map('GET', '/connexion', 'connexion', 'connexion');
+$router->map('GET', '/search/[*]', 'search', 'search');
 
 $match = $router->match();
 
@@ -63,6 +67,10 @@ if (is_array($match)) {
     if ($match['target'] === 'connexion') {
 
         \Nathel\ConnexionController::login_button();
+    }
+    if ($match['target'] === 'search') {
+
+        \Nathel\SearchCollectionsController::showSearchCollections();
     }
 
 

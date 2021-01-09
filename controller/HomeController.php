@@ -28,7 +28,6 @@ class HomeController extends Controller
     public function showHome()
     {
         Controller::storeURI();
-        ConnexionController::verif_login_page();
         View::header();
         include '../view/elements/home/jumbotron.php';
         $this->showMappools();
