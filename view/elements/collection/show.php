@@ -2,8 +2,8 @@
     <h3 class="card-title"><?= $collection->name ?></h3>
 
 
-    <span class="nb-maps"><?= $Nb_maps ?> Nb_mappools</span>
-
+    <span class="nb-maps">mappools <?= $Nb_mappools;?> <br> </span>
+    <span class="nb-maps">maps <?= $Nb_maps;?> </span>
     <div class="mappool-tags">
         <?php foreach ($tags as $tag) : ?>
 
@@ -14,7 +14,7 @@
 
     <div>
         <span>Manage with : </span>
-        $contributors
+        <?php echo $contributors;  ?>
     </div>
 
 

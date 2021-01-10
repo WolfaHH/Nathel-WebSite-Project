@@ -1,6 +1,6 @@
 
 
-<section class="profile-jumbotron" style="background: url('<?= $user->banner ?>')">
+<section class="profile-jumbotron" style="">
     <div>
         <figure class="thumbnail">
             <img src="<?= $user->thumbnail ?>" alt="<?= $user->name ?>'s profile">
@@ -8,10 +8,10 @@
         </figure>
         <a href="<?php $user->country ?>" class="country"></a>
         <div class="profile-stats">
-            <span class="stat stat-completed">Completed mappools<br><?= count($completed) ?></span>
-            <span class="stat stat-submitted">Submitted mappools<br><?= count($submitted) ?></span>
-            <span class="stat stat-followed">Followed mappool<br><?= count($follow) ?></span>
-            <span class="stat stat-rank">Classement générale<br>#<?= $user->rank ?></span>
+            <span class="stat stat-completed">Completed mappools<?= count($completed) ?><br></span>
+            <span class="stat stat-submitted">Submitted mappools<?= count($submitted) ?><br></span>
+            <span class="stat stat-followed">Followed mappool<?= count($follow) ?><br></span>
+            <span class="stat stat-rank">Classement générale#<?= $user->rank ?><br></span>
         </div>
         <ul class="profile-note">
 

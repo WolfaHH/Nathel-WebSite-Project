@@ -22,14 +22,14 @@ class SearchCollectionsController extends Controller
 
         }
         else{
-            $mots = explode( "+", $_GET['search']);
+            $mots = explode( " ", $_GET['search']);
             $tmp_collections = Collection::searchCollectionsWithName($mots);
             $collections = array();
-            foreach ($tmp_collections as $collection){if ($collection['Valeur'] == 5){array_push($collections, $collection);}}
-            foreach ($tmp_collections as $collection){if ($collection['Valeur'] == 4){array_push($collections, $collection);}}
-            foreach ($tmp_collections as $collection){if ($collection['Valeur'] == 3){array_push($collections, $collection);}}
-            foreach ($tmp_collections as $collection){if ($collection['Valeur'] == 2){array_push($collections, $collection);}}
-            foreach ($tmp_collections as $collection){if ($collection['Valeur'] == 1){array_push($collections, $collection);}}
+            foreach ($tmp_collections as $collection){if ($collection['value'] == 5){array_push($collections, $collection);}}
+            foreach ($tmp_collections as $collection){if ($collection['value'] == 4){array_push($collections, $collection);}}
+            foreach ($tmp_collections as $collection){if ($collection['value'] == 3){array_push($collections, $collection);}}
+            foreach ($tmp_collections as $collection){if ($collection['value'] == 2){array_push($collections, $collection);}}
+            foreach ($tmp_collections as $collection){if ($collection['value'] == 1){array_push($collections, $collection);}}
         }
         return $collections;
     }

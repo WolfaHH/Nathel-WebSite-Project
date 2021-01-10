@@ -14,7 +14,7 @@
 
     <div>
         <span>Manage with : </span>
-        $contributors
+        <?php echo $contributors; ?>
     </div>
 
     Bouton Edit

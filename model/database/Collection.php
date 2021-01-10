@@ -41,6 +41,14 @@ class Collection extends Dbh
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    /*
+    public function getCollectionContributorsRelation(): array
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM contributors WHERE collection_id = :collection_id');
+        $stmt->bindParam(':collection_id', $this->id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
     public function getCollectionContributors(): array
     {
@@ -48,7 +56,7 @@ class Collection extends Dbh
         $stmt->bindParam(':collection_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();
-    }
+    }*/
 
     public function getLastContributor(): array
     {
@@ -222,26 +230,40 @@ class Collection extends Dbh
     {
         $queries = self::P($mots);
         $collections = array();
-        foreach ($queries as $query){
-            $s = "";
-            if (count($query)>1){
-                for($i = 1; $i<count($query);$i++){
-                    $s.= ' AND "%'.$query[$i].'%"';
+        foreach ($queries as $key => $query){
+            if ($key>=1){
+                $s = "";
+                if (count($query)>1){
+                    for($i = 1; $i<count($query);$i++){
+                        $s.= ' AND "%'.$query[$i].'%"';
+                    }
                 }
+                $ch = $query[0];
+                $q = "%".$ch."%";
+                $stmt = self::connectToDb()->prepare('SELECT * FROM collections WHERE name LIKE :mot1 :suite');
+                $stmt->bindParam(':mot1', $q);
+                $stmt->bindParam(':suite', $s);
+                $stmt->execute();
+                $tmp = $stmt->fetchAll();
+
+                $i = 0;
+                foreach($tmp as $collection)
+                {
+                    for($j = 1; $j<=5; $j++)
+                    {
+                        if (count($query) === $j)
+                        {
+                            $tmp[$i]['value'] = $j;
+                        }
+                    }
+                    $i++;
+
+                }
+
+                $collections = array_merge($collections, $tmp);
             }
-            $q = "%".$query[0]."%";
-            $stmt = self::connectToDb()->prepare('SELECT * FROM collections WHERE name LIKE :mot1 :suite');
-            $stmt->bindParam(':mot1', $q);
-            $stmt->bindParam(':suite', $s);
-            $stmt->execute();
-            $tmp = $stmt->fetchAll();
-            if (count($query) == 1){ $tmp['Valeur'] = 1;}
-            if (count($query) == 2){ $tmp['Valeur'] = 2;}
-            if (count($query) == 3){ $tmp['Valeur'] = 3;}
-            if (count($query) == 4){ $tmp['Valeur'] = 4;}
-            if (count($query) >= 5){ $tmp['Valeur'] = 5;}
-            $collections = array_merge($collections, $tmp);
         }
+        //var_dump($collections);
         return $collections;
     }
     // fonctions pour contributeur ; requete : SELECT * FROM contributors cb INNER JOIN collections cl ON cb.collection_id = cl.id WHERE cb.user_id = X

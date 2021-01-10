@@ -16,12 +16,16 @@ class Mappool extends Dbh{
 
 
     public function __construct($mappool){
+
         if (is_array($mappool) === true){
             $this->id = $mappool['id'];
         } else {
             $this->id = $mappool;
+
             $mappool = $this->getMappool();
+
         }
+
         $this->name = $mappool['name'];
         $this->collection_id = $mappool['collection_id'];
         $this->thumbnail = $mappool['thumbnail'];
@@ -66,10 +70,11 @@ class Mappool extends Dbh{
 
     public function GetNbMaps()
     {
-        $stmt = $this->connectToDb()->prepare('SELECT COUNT(*) FROM mappool_maps WHERE mappool_id = :mappool_id ORDER BY mode');
+        $stmt = $this->connectToDb()->prepare('SELECT COUNT(*) FROM mappool_maps WHERE mappool_id = :mappool_id');
         $stmt->bindParam(':mappool_id', $this->id);
         $stmt->execute();
-        return $stmt->fetchAll();
+
+        return $stmt->fetch();
     }
 
     public function GetCollection()
@@ -148,6 +153,5 @@ class Mappool extends Dbh{
 
 
 }
-?>
 
-}
+

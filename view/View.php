@@ -10,7 +10,6 @@ Abstract class View
     {
 
         include '../view/elements/header.php';
-        echo 'flag';
     }
 
     public static function footer()

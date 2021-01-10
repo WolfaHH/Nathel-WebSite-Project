@@ -16,7 +16,7 @@ class ManagePoolsController extends Controller
             die();
         }*/
         // Ce qui marche pour des tests ;
-        return new User(2);
+        return new User(9543633);
     }
 
     public function showManagePools()

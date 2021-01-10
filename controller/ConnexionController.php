@@ -56,7 +56,6 @@ abstract class ConnexionController extends Controller
     public static function verif_login_page()
     {
         if (isset($_SESSION['user'])) {
-            echo 'bonsoir';
             //Controller::updateSession(); A Mettre plus tard ptet; idk
         } elseif (isset($_COOKIE['token_user'])) {
             var_dump($_COOKIE);

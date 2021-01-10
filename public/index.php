@@ -28,7 +28,7 @@ $router->map('GET', '/user/update/[i:id]', 'userUpdate', 'userUpdate');
 $router->map('GET', '/collection/[i:id]', 'collection', 'collection');
 $router->map('GET', '/managemypools', 'managemypools', 'managemypools');
 $router->map('GET', '/connexion', 'connexion', 'connexion');
-$router->map('GET', '/search/[*]', 'search', 'search');
+$router->map('GET', '/search', 'search', 'search');
 
 $match = $router->match();
 

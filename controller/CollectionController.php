@@ -28,7 +28,9 @@ class CollectionController extends Controller
         $this->mappools = $this->collection->getCollectionMappools();
 
         View::header();
+
         $this->showCollection();
+
         $this->showMappools();
         View::footer();
 

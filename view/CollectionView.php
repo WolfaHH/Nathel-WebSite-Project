@@ -13,15 +13,24 @@ class CollectionView extends View
         if (isset($_SESSION['user'])){
             $is_follow = $_SESSION['user']->getUserFollow($collection);
         }*/
+
+        $Nb_mappools = 0;
+        foreach($collection->getCollectionMappools() as $key):
+            $Nb_mappools += 1;
+        endforeach;
         $Nb_maps = 0;
+
         foreach($collection->getCollectionMappools() as $key => $value):
-            $tmp = new Mappool($key);
-            $Nb_maps += $tmp->getNbMaps()[0]["COUNT(*)"];
+
+            $tmp = new Mappool($value['id']);
+
+            $Nb_maps += $tmp->getNbMaps()['COUNT(*)'];
             endforeach;
 
         $tags = $collection->getCollectionTags();
 
-        $contributors = $collection->getCollectionContributors();
+        /*$contributors = $collection->getCollectionContributors();*/
+        $contributors = "Thrace12, NATH, Farrell-Shey";
 
         require '../view/elements/collection/show.php';
     }
@@ -39,7 +48,8 @@ class CollectionView extends View
 
         $tags = $collection->getCollectionTags();
 
-        $contributors = $collection->getCollectionContributors();
+        //$contributors = $collection->getCollectionContributors();
+        $contributors = "Thrace12, NATH, Farrell-Shey";
 
         require '../view/elements/collection/showV2.php';
     }

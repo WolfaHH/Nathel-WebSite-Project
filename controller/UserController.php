@@ -31,7 +31,7 @@ class UserController extends Controller
 
         // appel visuel de la page
         View::header();
-        echo 'flag';
+
         UserView::banner($user);
 
         UserView::activity($user);
