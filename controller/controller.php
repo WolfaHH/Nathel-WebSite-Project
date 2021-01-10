@@ -8,7 +8,7 @@ Abstract class Controller
     protected static function updateSession()
     {
         if (isset($_SESSION['user'])) {
-            $_SESSION['user'] = new User($_SESSION['user']['osu_id']);
+            $_SESSION['user'] = new User($_SESSION['user']->osu_id);
         }
     }
 

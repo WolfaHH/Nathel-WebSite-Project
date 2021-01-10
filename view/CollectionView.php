@@ -9,9 +9,10 @@ class CollectionView extends View
 
     public static function show(Collection $collection)
     {
+        /*
         if (isset($_SESSION['user'])){
             $is_follow = $_SESSION['user']->getUserFollow($collection);
-        }
+        }*/
         $Nb_maps = 0;
         foreach($collection->getCollectionMappools() as $key => $value):
             $tmp = new Mappool($key);
@@ -27,9 +28,10 @@ class CollectionView extends View
 
     public static function showV2(Collection $collection)
     {
+        /*
         if (isset($_SESSION['user'])){
             $is_follow = $_SESSION['user']->getUserFollow($collection);
-        }
+        }*/
         $Nb_mappools = 0;
         foreach($collection->getCollectionMappools() as $key):
             $Nb_mappools += 1;
