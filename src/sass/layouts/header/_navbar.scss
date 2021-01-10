@@ -1,4 +1,4 @@
-.navbar{
+.header-desktop {
   background-color: $light;
   position: fixed;
   bottom: 0;
@@ -7,71 +7,169 @@
   width: 100vw;
   box-shadow: 0 -1px 2px 1px rgb(0, 0, 0, 0.25);
 
-  ul{
+  ul {
     display: flex;
     margin: auto;
 
-    .nav-item{
 
-      flex: 1 1 auto;
-      text-align: center;
-      flex-basis: 0;
-      flex-grow: 1;
-      display: block;
-      padding: .5em 0 0 0;
+  }
+}
 
-      &:after{
+.nav-item {
 
-        content: '';
-        display: block;
-        margin: auto;
-        height: 3px;
-        border-radius: $light-border;
-        width: 0;
-        background-color: transparent;
-        transition: width .5s ease, background-color .5s ease;
+  flex: 1 1 auto;
+  text-align: center;
+  flex-basis: 0;
+  flex-grow: 1;
+  display: block;
+  padding: .5em 0 0 0;
 
-      }
+  &:after {
 
-      .nav-link{
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    border-radius: $light-border;
+    width: 0;
+    background-color: transparent;
+    transition: width .5s ease, background-color .5s ease;
 
-        color: $secondary;
-        display: grid;
-        grid-template-areas:
+  }
+
+  .nav-link {
+
+    color: $secondary;
+    display: grid;
+    grid-template-areas:
         "svg"
         "text";
 
-        .svg{
-          fill: $secondary;
-          margin: auto;
-          width: 33px;
-          height: 33px;
-          grid-area: svg;
-        }
+    .svg {
+      fill: $secondary;
+      margin: auto;
+      width: 33px;
+      height: 33px;
+      grid-area: svg;
+    }
 
-        .text{
-          grid-area: text;
-        }
-      }
+    .text {
+      grid-area: text;
+    }
+  }
 
-      &:hover{
+  &:hover {
 
-        &:after{
+    &:after {
 
-          width: 70%;
-          background-color: $primary;
-          transition: width .5s ease, background-color .5s ease;
+      width: 70%;
+      background-color: $primary;
+      transition: width .5s ease, background-color .5s ease;
 
-        }
+    }
 
-        .nav-link{
-          color: $primary;
+    .nav-link {
+      color: $primary;
 
-          .svg{
-            fill: $primary;
-          }
-        }
+      .svg {
+        fill: $primary;
       }
     }
   }
+}
+
+@media (min-width: $breakpoint-sm) {
+
+  .header-desktop {
+    top: 0;
+    bottom: unset;
+    box-shadow: 0 1px 2px 1px rgb(0, 0, 0, 0.25);
+    display: flex;
+
+    .nav-item:hover:after{
+      width: 100% !important;
+    }
+
+    .header-logo {
+      width: 3em;
+      margin-left: 2vw;
+      margin-right: 0.5em;
+    }
+
+
+
+    .navbar {
+      margin-right: auto;
+
+      .nav-item {
+        margin: 0 1em;
+
+      }
+    }
+
+    .nav-desktop {
+
+      align-items: center;
+      justify-content: space-between;
+
+      .form-header {
+
+        align-content: center;
+        display: flex;
+
+        .search {
+          height: 2.5em;
+          margin: 0.5em 0.3em 0.5em 1em !important;
+          background: rgb(161, 161, 161, .33) !important;
+
+          &::placeholder {
+            color: $secondary !important;
+
+          }
+        }
+
+        .btn-search {
+          margin-right: 1em !important;
+        }
+      }
+
+      .twitter {
+        border-radius: 100px;
+        border: 2.5px solid rgba(161, 161, 161, 0.29);
+        box-sizing: border-box;
+        padding: .4em;
+        fill: $secondary;
+        height: 45px;
+        width: 45px;
+        margin-right: 0.5em;
+
+        &:hover {
+          fill: #00ACEE;
+          border: 2.5px solid rgba(0, 172, 238, 0.29);
+        }
+      }
+
+      .discord {
+        border-radius: 100px;
+        border: 2.5px solid rgba(161, 161, 161, 0.29);
+        box-sizing: border-box;
+        padding: .4em;
+        fill: $secondary;
+        height: 45px;
+        width: 45px;
+
+        &:hover {
+          fill: #7289da;
+          border: 2.5px solid rgba(114, 137, 218, 0.29);
+        }
+      }
+
+    }
+
+  }
+
+  .mr-1 {
+    margin-right: 2vw;
+  }
+
 }

@@ -1,6 +1,6 @@
 .search-mobile {
   display: grid;
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100vw;
   background: $primary;
@@ -26,22 +26,24 @@
   }
 }
 
-.search {
-  background: rgb(0, 0, 0, .33);
-  border-radius: $strong-border;
-  margin: 0.7em 1em;
-  border: none;
-  padding: 0 1em;
-  min-width: 100px;
+#header {
+  .search {
+    background: rgb(0, 0, 0, .33);
+    border-radius: $strong-border;
+    margin: 0.7em 1em;
+    border: none;
+    padding: 0 1em;
+    min-width: 100px;
 
-  &::placeholder {
-    color: $classic;
+    &::placeholder {
+      color: $classic;
+    }
   }
-}
 
-.btn-search {
-  background: none;
-  border: none;
-  fill: $secondary;
-  margin-right: .5em;
+  .btn-search {
+    background: none;
+    border: none;
+    fill: $secondary;
+    margin-right: .5em;
+  }
 }
