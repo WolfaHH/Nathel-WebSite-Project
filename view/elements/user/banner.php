@@ -1,9 +1,10 @@
+
 <section class="banner-user">
 
     <div class="banner"
-         style="background-image: url('<?= $user->cover ?>');">
+         style="background-image: url('https://assets.ppy.sh/user-profile-covers/8418652/912870f17b7af86f48aa41d10985f9312866697b756d9d30a1c1f08f8219d98e.jpeg');">
         <div class="user-info">
-            <img src="<?= $user->thumbnail ?>" alt="<?= $user->name ?>'s profile" class="thumbnail">
+            <img src="https://a.ppy.sh/8418652?1593876351.png" alt="<?= $user->name ?>'s profile" class="thumbnail">
             <h1 class="h1 user-name"><?= $user->name ?></h1>
             <img class="country" src="https://osu.ppy.sh/images/flags/<?php $user->country ?>.png" alt="<?php $user->country ?>">
         </div>

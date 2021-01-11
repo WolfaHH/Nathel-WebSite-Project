@@ -4,8 +4,8 @@
          style="background-image: url('<?= $collection->thumbnail ?>');">
         <div class="info-collection">
             <h1 class="name"><?= $collection->name ?></h1>
-            <span class="mappool"><?= $Nb_mappools;?> LEVELS</span>
-            <span class="maps"><?= $Nb_maps;?></span>
+            <span class="nb-mappool"><?= $Nb_mappools;?> LEVELS</span>
+            <span class="maps"><?= $Nb_maps;?> Maps</span>
 
             <form class="form form-following" action="#" method="post">
                 <button class="btn btn-following">Following</button>

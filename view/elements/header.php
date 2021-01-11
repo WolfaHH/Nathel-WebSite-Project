@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="assets/css/app.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/app.css" rel="stylesheet" type="text/css">
     <title>Document</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
 
     <div class="header-desktop">
 
-        <img class="header-logo d-none d-sm-block" src="assets/img/logo_1_a.png" alt="notre super logo">
+        <img class="header-logo d-none d-sm-block" src="/assets/img/logo_1_a.png" alt="notre super logo">
 
         <nav class="navbar">
             <ul>
@@ -89,7 +89,7 @@
 
     <form class="d-sm-none search-mobile">
 
-        <img class="header-logo" src="assets/img/logo_1_a.png" alt="notre super logo">
+        <img class="header-logo" src="/assets/img/logo_1_a.png" alt="notre super logo">
 
         <input class="form-control search" type="search" placeholder="Search" aria-label="Search">
 

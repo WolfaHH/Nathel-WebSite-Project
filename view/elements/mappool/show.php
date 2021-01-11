@@ -4,12 +4,12 @@
          style="background-image: url('<?= $mappool->thumbnail ?>')">
         <div class="card-mappool">
             <h3 class="card-title"><?= $mappool->name ?></h3>
-            <span class="mappool-collection">created by <span class="name"><?= $mappool->collection ?></span></span>
+            <span class="mappool-collection">created by <span class="name"><?= $collection->name ?></span></span>
             <span class="nb-maps">26 maps</span>
 
             <form class="form form-follow" action="?" method="post">
 
-                <button type="submit" class="btn btn-<?= isset($is_follow) ? 'follow' : 'following' ?>">
+                <button type="submit" class="btn btn-<?= isset($is_follow) ? 'following' : 'follow' ?>">
 
                     <?php if (isset($is_follow)): ?>
 
