@@ -64,7 +64,7 @@ class User extends Dbh
         return $stmt->fetchAll();
     }
 
-    public function getUser(): array
+    public function getUser()
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE osu_id = :id');
         $stmt->bindParam(':id', $this->osu_id);

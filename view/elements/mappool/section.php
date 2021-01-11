@@ -1,6 +1,6 @@
-<section class="bg-medium">
+<section class="section">
 
-    <h2 class="section-title"><?= $sectionName ?></h2>
+    <h2 class="h2"><?= $sectionName ?></h2>
     <?php
 
     foreach ($mappools as $mappool_user) {
