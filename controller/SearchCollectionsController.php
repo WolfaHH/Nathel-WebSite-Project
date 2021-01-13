@@ -8,11 +8,15 @@ class SearchCollectionsController extends Controller
 {
     public static function showSearchCollections()
     {
+
+        View::header();
         include '../view/elements/searchbar/bar.php';
         include '../view/elements/searchbar/parameters.php';
 
         $collections = self::loadCollections();
         include '../view/elements/searchbar/results.php';
+        var_dump($_SESSION);
+        view::footer();
     }
 
     public static function loadCollections()
