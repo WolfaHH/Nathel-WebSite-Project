@@ -15,7 +15,6 @@ class SearchCollectionsController extends Controller
 
         $collections = self::loadCollections();
         include '../view/elements/searchbar/results.php';
-        var_dump($_SESSION);
         view::footer();
     }
 

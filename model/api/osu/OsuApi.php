@@ -7,7 +7,7 @@ class OsuApi
 {
     const CLIENT_ID = 4227;
     const SECRET = 'kB9lkO0UUgvjdOmizgHUE5FJdM1d6JpTCJG0UFGr';
-    const URI = 'http://mappool-website-project.nath/connexion';
+    const URI = 'https://533b3f89b216.ngrok.io/connexion';
 
     protected $current_credentials_token;
     protected $user_token;

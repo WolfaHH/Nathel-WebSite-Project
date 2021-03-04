@@ -3,13 +3,15 @@
 
 require '../vendor/autoload.php';
 require '../controller/Autoloader.php';
+
 \Nathel\Autoloader::Register();
+echo'<br><br><br><br>';
+
 session_start();
 
-
 if (isset($_SESSION['OsuApi']) === False){
-    echo'test';
-    $_SESSION['OsuApi'] = new \Nathel\OsuApi();
+    echo'tes';
+    $_SESSION['OsuApi'] = new \Nathel\OsuApi(); // A term, bascu user token de osu api dans classe user
 }
 
 \Nathel\ConnexionController::verif_login_page();
@@ -31,6 +33,7 @@ $router->map('GET', '/connexion', 'connexion', 'connexion');
 $router->map('GET', '/search', 'search', 'search');
 
 $match = $router->match();
+
 
 
 if (is_array($match)) {

@@ -6,7 +6,30 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/assets/css/app.css" rel="stylesheet" type="text/css">
-    <title>Document</title>
+
+    <!-- Scripts and default style for the double slider range (filters rank) -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 1,
+                max: 500000,
+                values: [ 1, 500000 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                }
+            });
+            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+        } );
+    </script>
+
+
+    <title>Nathel Mappools</title>
 </head>
 <body>
 <header id="header">
@@ -25,7 +48,7 @@
                                   d="M8.09692 13.75L16.3488 5.49817L24.6006 13.75H24.5988V27.5H8.09882V13.75H8.09692ZM5.34882 16.4981L3.31815 18.5288L1.375 16.5856L14.4059 3.55477C15.4789 2.48174 17.2186 2.48174 18.2916 3.55477L31.3225 16.5856L29.3794 18.5288L27.3488 16.4982V27.5C27.3488 29.0188 26.1176 30.25 24.5988 30.25H8.09882C6.58003 30.25 5.34882 29.0188 5.34882 27.5V16.4981Z"/>
                         </svg>
 
-                        <a class="text" href="http://mappool-website-project.nath/">Home</a>
+                        <a class="text" href="https://533b3f89b216.ngrok.io/">Home</a>
 
                     </a>
                 </li>
@@ -37,7 +60,7 @@
                                   d="M19.9998 21.5C21.2885 21.5 22.3332 20.4553 22.3332 19.1667H23.4998C24.7885 19.1667 25.8332 18.122 25.8332 16.8333V5.16667C25.8332 3.878 24.7885 2.83333 23.4998 2.83333H22.3332C22.3332 1.54467 21.2885 0.5 19.9998 0.5H5.99984C4.71117 0.5 3.6665 1.54467 3.6665 2.83333H2.49984C1.21117 2.83333 0.166504 3.878 0.166504 5.16667V16.8333C0.166504 18.122 1.21117 19.1667 2.49984 19.1667H3.6665C3.6665 20.4553 4.71117 21.5 5.99984 21.5H19.9998ZM19.9998 2.83333V19.1667H5.99984V2.83333H19.9998ZM12.9998 11.1639V5.32004L18.3137 8.86259L17.0194 10.804L15.3332 9.67991V13.9166C15.3332 15.6123 13.7052 16.8333 11.8332 16.8333C9.96117 16.8333 8.33317 15.6123 8.33317 13.9166C8.33317 12.221 9.96117 11 11.8332 11C12.2381 11 12.6317 11.0571 12.9998 11.1639ZM2.49984 5.16667H3.6665V16.8333H2.49984V5.16667ZM22.3332 5.16667V16.8333H23.4998V5.16667H22.3332ZM12.9998 13.9167C12.9998 14.154 12.5385 14.5 11.8332 14.5C11.1278 14.5 10.6665 14.154 10.6665 13.9167C10.6665 13.6793 11.1278 13.3333 11.8332 13.3333C12.5385 13.3333 12.9998 13.6793 12.9998 13.9167Z"/>
                         </svg>
 
-                        <a class="text" href="http://mappool-website-project.nath/search">Search</a>
+                        <a class="text" href="https://533b3f89b216.ngrok.io/search">Search</a>
                     </a>
                 </li>
 
@@ -47,7 +70,7 @@
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M15.4998 29.7082C7.65279 29.7082 1.2915 23.3469 1.2915 15.4998C1.2915 7.65279 7.65279 1.2915 15.4998 1.2915C23.3469 1.2915 29.7082 7.65279 29.7082 15.4998C29.7082 23.3469 23.3469 29.7082 15.4998 29.7082ZM25.0575 22.1192C26.361 20.2407 27.1248 17.9595 27.1248 15.4999C27.1248 9.07955 21.9201 3.87486 15.4998 3.87486C9.07952 3.87486 3.87483 9.07955 3.87483 15.4999C3.87483 17.9595 4.63869 20.2407 5.94213 22.1192C7.39391 20.2015 10.8028 19.377 15.4812 19.3748C12.5979 19.3661 10.3332 17.334 10.3332 12.9165C10.3332 10.0177 12.3729 7.74986 15.4998 7.74986C18.6182 7.74986 20.6665 10.2319 20.6665 13.1749C20.6665 17.4018 18.3749 19.3663 15.5186 19.3748C20.1969 19.377 23.6058 20.2016 25.0575 22.1192ZM23.2042 24.2054C22.8262 22.846 20.1103 21.9582 15.4998 21.9582C10.8893 21.9582 8.17346 22.846 7.79544 24.2054C9.84658 26.022 12.5444 27.1249 15.4998 27.1249C18.4552 27.1249 21.1531 26.022 23.2042 24.2054ZM12.9165 12.9165C12.9165 15.8476 13.9734 16.7915 15.4998 16.7915C17.021 16.7915 18.0832 15.8853 18.0832 13.1748C18.0832 11.5608 17.0701 10.3332 15.4998 10.3332C13.8642 10.3332 12.9165 11.387 12.9165 12.9165Z"/>
                         </svg>
-                        <a class="text" href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=http://mappool-website-project.nath/connexion&scope=public">Log in</a>
+                        <a class="text" href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=https://533b3f89b216.ngrok.io/connexion&scope=public">Log in</a>
                     </a>
                 </li>
 
@@ -78,15 +101,15 @@
                 <a href="#" class="nav-link active">
 
                     <?php if (isset($_SESSION['user'])): ?>
-                        <img src=<?php echo $_SESSION['user']->thumbnail;?>>
+                        <img class="svg"src=<?php echo $_SESSION['user']->thumbnail;?>>
 
-                         <a class="text" href= <?php echo "http://mappool-website-project.nath/user/"  . $_SESSION['user']->osu_id;?>>Profile</a>
+                         <a class="text" href= <?php echo "https://533b3f89b216.ngrok.io/user/"  . $_SESSION['user']->osu_id;?>>Profile</a>
                     <?php else: ?>
                         <svg class=" svg" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M15.4998 29.7082C7.65279 29.7082 1.2915 23.3469 1.2915 15.4998C1.2915 7.65279 7.65279 1.2915 15.4998 1.2915C23.3469 1.2915 29.7082 7.65279 29.7082 15.4998C29.7082 23.3469 23.3469 29.7082 15.4998 29.7082ZM25.0575 22.1192C26.361 20.2407 27.1248 17.9595 27.1248 15.4999C27.1248 9.07955 21.9201 3.87486 15.4998 3.87486C9.07952 3.87486 3.87483 9.07955 3.87483 15.4999C3.87483 17.9595 4.63869 20.2407 5.94213 22.1192C7.39391 20.2015 10.8028 19.377 15.4812 19.3748C12.5979 19.3661 10.3332 17.334 10.3332 12.9165C10.3332 10.0177 12.3729 7.74986 15.4998 7.74986C18.6182 7.74986 20.6665 10.2319 20.6665 13.1749C20.6665 17.4018 18.3749 19.3663 15.5186 19.3748C20.1969 19.377 23.6058 20.2016 25.0575 22.1192ZM23.2042 24.2054C22.8262 22.846 20.1103 21.9582 15.4998 21.9582C10.8893 21.9582 8.17346 22.846 7.79544 24.2054C9.84658 26.022 12.5444 27.1249 15.4998 27.1249C18.4552 27.1249 21.1531 26.022 23.2042 24.2054ZM12.9165 12.9165C12.9165 15.8476 13.9734 16.7915 15.4998 16.7915C17.021 16.7915 18.0832 15.8853 18.0832 13.1748C18.0832 11.5608 17.0701 10.3332 15.4998 10.3332C13.8642 10.3332 12.9165 11.387 12.9165 12.9165Z"/>
                         </svg>
-                         <a class="text" href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=http://mappool-website-project.nath/connexion&scope=public">Log in</a>
+                         <a class="text" href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=https://533b3f89b216.ngrok.io/connexion&scope=public">Log in</a>
                     <?php endif;?>
                     
                 </a>

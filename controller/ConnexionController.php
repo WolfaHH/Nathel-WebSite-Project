@@ -21,8 +21,8 @@ abstract class ConnexionController extends Controller
         }
 
         $OsuApi = $_SESSION['OsuApi'];
-        $_SESSION['token'] = $OsuApi->getToken($_GET['code']);
-        $api = $OsuApi->getOwnUserInfo($_SESSION['token']);
+        $token = $OsuApi->getToken($_GET['code']);
+        $api = $OsuApi->getOwnUserInfo($token);
         $id = $api['id'];
 
         if (is_array(User::checkUser($id)) === False) {
@@ -31,7 +31,7 @@ abstract class ConnexionController extends Controller
             $data = array();
             $data['osu_id'] = $api['id'];
             $data['name'] = $api['username'];
-            $data['password'] = $_SESSION['token'];
+            $data['password'] = $token;
             $data['thumbnail'] = $api['avatar_url'];
             $data['rank'] = $api['statistics']['pp_rank'];
             $data['country'] = $api['country_code'];
@@ -40,7 +40,8 @@ abstract class ConnexionController extends Controller
 
         }
 
-        $_SESSION['user'] = new User(9543633);
+        $_SESSION['user'] = new User($id);
+        $_SESSION['user']->token = $token;
 
 
         if (isset($_SESSION['REQUEST_URI'])){
@@ -49,7 +50,6 @@ abstract class ConnexionController extends Controller
         }else{
             header('Location: /');
         }
-
 
     }
 

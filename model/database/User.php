@@ -22,6 +22,7 @@ class User extends Dbh
     public $a;
     public $created_at;
     public $updated_at;
+    public $token;
 
 
     public function __construct($id)
@@ -29,6 +30,7 @@ class User extends Dbh
 
         $this->osu_id = $id;
         $user = $this->getUser();
+        $token = null;
         $this->id = $user['id'];
         $this->name = $user['name'];
         $this->thumbnail = $user['thumbnail'];
