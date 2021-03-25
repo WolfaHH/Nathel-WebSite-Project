@@ -194,10 +194,28 @@ class Collection extends Dbh
     //Search bar query :
 
 
-    public static function getMostPopular()
+    public static function getMostPopular($filters=array())
     {
-        $stmt = self::connectToDb()->prepare('SELECT * FROM mappools mp INNER JOIN collections cl ON mp.collection_id = cl.id ORDER BY mp.follow');
+        if ($filters == array()){
+            $stmt = self::connectToDb()->prepare('SELECT * FROM mappools mp INNER JOIN collections cl ON mp.collection_id = cl.id ORDER BY mp.follow');
+        }else{
+            $s = "";
+            foreach($filters as $filter){
+                $s.=' '.$filter.' AND ';
+            }
+            var_dump($s);
+            $s = substr($s, 0, -5);
+            var_dump($s);
+
+            $stmt = self::connectToDb()->prepare('SELECT DISTINCT * FROM collections cl 
+                                                        INNER JOIN collection_tags ct ON cl.id = ct.collection_id
+                                                        WHERE ct.tag_id = :suite');
+
+            $stmt->bindParam(':suite', $s);
+        }
+
         $stmt->execute();
+        //var_dump($stmt->fetchAll());
         return $stmt->fetchAll();
     }
 
@@ -226,7 +244,7 @@ class Collection extends Dbh
         return $P;
     }
 
-    public static function searchCollectionsWithName($mots)
+    public static function  searchCollectionsWithName($mots)
     {
         $queries = self::P($mots);
         $collections = array();
