@@ -10,11 +10,13 @@ class SearchCollectionsController extends Controller
     {
 
         View::header();
+
         include '../view/elements/searchbar/bar.php';
         include '../view/elements/searchbar/parameters.php';
 
         $collections = self::loadCollections();
         include '../view/elements/searchbar/results.php';
+
         view::footer();
     }
 
