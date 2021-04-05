@@ -36,8 +36,7 @@
     padding: 1.5rem;
     background-color: rgba(34, 40, 42, 80%);
     border-radius: $light-border;
-    max-width: 1200px;
-    min-height: 500px;
+    max-width: 1000px;
     margin: 5vh 0 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -99,7 +98,7 @@
         }
 
         &:nth-child(2){
-          margin: 120px -50px 120px 220px;
+          margin: 5vh -50px 5vh 220px;
 
           &:hover{
             transform: rotate(10deg);
