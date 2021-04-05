@@ -25,7 +25,6 @@
   flex-basis: 0;
   flex-grow: 1;
   display: block;
-  padding: .5em 0 0 0;
 
   &:after {
 
@@ -83,10 +82,12 @@
 @media (min-width: $breakpoint-sm) {
 
   .header-desktop {
+    z-index: 9999;
     top: 0;
     bottom: unset;
     box-shadow: 0 1px 2px 1px rgb(0, 0, 0, 0.25);
     display: flex;
+    padding-top: 5px;
 
     .logo_nathel{
       margin: 0 1rem;
@@ -94,23 +95,22 @@
 
     .nav-item {
 
-      min-width: 80px;
-      padding: 0 1em;
-      height: 100px;
-      margin-top: 2px;
+      min-width: 120px;
+
+      height: 95px;
 
       &:hover {
         background: $dark;
 
         &:after {
-          width: 100% !important;
+          width: 70% !important;
 
         }
       }
     }
 
     .nav-link {
-      padding-top: 1rem;
+      padding: 1rem 1em 0 1rem;
     }
 
     .navbar {
@@ -186,6 +186,7 @@
     height: 100vh;
     width: 100px;
     background-color: $light;
+    box-shadow: 1px 0 2px 1px rgb(0 0 0 / 25%);
 
     .slide-wrap{
       width: 100%;

@@ -31,8 +31,6 @@ class HomeController extends Controller
         View::header();
         include '../view/elements/home/jumbotron.php';
         $this->showMappools();
-        include '../view/elements/home/aftertron.php';
-        View::footer();
 
 
 

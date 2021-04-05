@@ -28,6 +28,20 @@
   }
 }
 
+.btn-primary{
+  border-radius: $light-border;
+  background-color: $primary;
+  color: $secondary;
+  fill: $secondary;
+}
+
+.btn-pink{
+  border-radius: $light-border;
+  background-color: #BB1177;
+  color: $secondary;
+  fill: $secondary;
+}
+
 .btn-follow{
   background-color: $primary;
   color: $secondary;
@@ -46,4 +60,16 @@
 
   &:hover{
   }
+}
+
+.btn-lg{
+  padding:0.5rem;
+  font-size: 1.5rem;
+  width: 200px;
+}
+
+.btn-xl{
+  padding:1rem;
+  font-size: 2rem;
+  width: 300px;
 }
