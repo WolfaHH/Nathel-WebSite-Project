@@ -36,7 +36,7 @@ class Collection extends Dbh
 
     public function getCollectionMappools(): array
     {
-        $stmt = self::connectToDb()->prepare('SELECT id FROM mappools WHERE collection_id = :collection_id');
+        $stmt = self::connectToDb()->prepare('SELECT * FROM mappools WHERE collection_id = :collection_id');
         $stmt->bindParam(':collection_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -65,6 +65,27 @@ class Collection extends Dbh
         $stmt->execute();
         return $stmt->fetch();
     }
+    public function getContributors(): array
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM contributors WHERE collection_id = :collection_id');
+        $stmt->bindParam(':collection_id', $this->id);
+        $stmt->execute();
+        return $stmt->fetchALL();
+    }
+    public function getContributorsAsUsers(): array //Renvoi un tableau d'objets de type User
+    {
+        $contributors = $this->getContributors();
+        $res = array();
+        foreach($contributors as $con){
+            $new = new User($con['user_id']);
+            array_push($res, $new);
+
+
+
+        }
+
+        return $res;
+    }
 
     public function getCollectionCreator(): array
     {
@@ -86,6 +107,11 @@ class Collection extends Dbh
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM collection_tags WHERE collection_id = :collection_id AND tag_id = :tag_id');
         $stmt->bindParam(':collection_id', $this->id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public static function getTAGS(){
+        $stmt = self::connectToDb()->prepare('SELECT * FROM tags');
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -111,6 +137,12 @@ class Collection extends Dbh
         $id = $dbh->lastInsertId();
 
         $user->storeCreator($id);
+
+        $stmt = self::connectToDb()->prepare('SELECT id FROM collections WHERE thumbnail = :thumbnail');
+        $stmt->bindParam(':thumbnail', $data['thumbnail']);
+        $stmt->execute();
+        return $stmt->fetch()['id'];
+
     }
 
     public static function storeNewTag($data): string

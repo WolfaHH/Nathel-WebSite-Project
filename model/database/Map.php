@@ -22,8 +22,10 @@ class Map extends Dbh{
     public function __construct($map_id)
     {
         $this->id = $map_id;
-        $map = $this->getMap();
+        $map = $this->getMap()[0];
         $this->beatmapset_id = $map['beatmapset_id'];
+        $this->name = $this->GetBeatmapset()['name'];
+        $this->artist = $this->GetBeatmapset()['artist'];
         $this->difficulty = $map['difficulty'];
         $this->bpm = $map['bpm'];
         $this->ar = $map['ar'];
@@ -56,7 +58,7 @@ class Map extends Dbh{
         $stmt = self::connectToDb()->prepare('SELECT * FROM beatmapsets WHERE id = :id');
         $stmt->bindParam(':id', $this->beatmapset_id);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     public static function StoreMap($data)

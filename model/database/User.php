@@ -110,7 +110,7 @@ class User extends Dbh
     public function getUserCollections(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM contributors cb INNER JOIN collections cl ON cb.collection_id = cl.id WHERE cb.user_id = :user_id  ');
-        $stmt->bindParam(':user_id', $this->id);
+        $stmt->bindParam(':user_id', $this->osu_id);
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -214,7 +214,7 @@ class User extends Dbh
     public function storeCreator($collection_id)
     {
         $stmt = self::connectToDb()->prepare('INSERT INTO contributors (user_id, collection_id, creator) VALUES (:user_id, :collection_id, 1)');
-        $stmt->bindParam(':user_id', $this->id);
+        $stmt->bindParam(':user_id', $this->osu_id);
         $stmt->bindParam(':collection_id', $collection_id);
         $stmt->execute();
     }

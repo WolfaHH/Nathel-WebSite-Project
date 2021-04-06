@@ -12,7 +12,7 @@ class SearchCollectionsController extends Controller
         View::header();
 
         include '../view/elements/searchbar/bar.php';
-        include '../view/elements/searchbar/parameters.php';
+
 
         $collections = self::loadCollections();
         include '../view/elements/searchbar/results.php';
@@ -22,21 +22,44 @@ class SearchCollectionsController extends Controller
 
     public static function loadCollections()
     {
-        $filters = [13, 7];
-        if (isset($_GET['search']) == False) {
-            if (isset($filters) == False){
-                $collections = Collection::getMostPopular();
-            }
-            else{
-                $collections = Collection::getMostPopular($filters);
-            }
+
+        # pour les filtres, optimiser à termes le get en URL
+        #pour l'instant seul les critères catégorie et game mod sont appliqués
 
 
+        if (isset($_GET['gm']) or isset($_GET['category'])){
+            $filters = array();
+            if (isset($_GET['gm'])){
+                array_push($filters, $_GET['gm']);
+            }
+            if (isset($_GET['category'])){
+                foreach($_GET['category'] as $value){
+                    array_push($filters, $value);
+
+                }
+            }
         }
+
+
+        #Cas ou la recherche est standard par popularité, avec donc possibilité de filtrer
+        if (isset($_GET['search']) == False){
+            if (strlen($_GET['search']) == 0) {
+                if (isset($filters) == False){
+                    $collections = Collection::getMostPopular();
+                }
+                else{
+
+                    $collections = Collection::getMostPopular($filters);
+                }
+            }
+        }
+
+
+        #cas ou la recherche est par mot clés, avec impossibilité d'utiliser les filtres pour le moment
         else{
 
             $mots = explode( " ", $_GET['search']);
-            $tmp_collections = Collection::searchCollectionsWithName($mots, $filters);
+            $tmp_collections = Collection::searchCollectionsWithName($mots);
             $collections = array();
             foreach ($tmp_collections as $collection){if ($collection['value'] == 5){array_push($collections, $collection);}}
             foreach ($tmp_collections as $collection){if ($collection['value'] == 4){array_push($collections, $collection);}}

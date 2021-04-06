@@ -1,5 +1,6 @@
 <?php
 
+
 /* LOADING OBJECT */
 require '../vendor/autoload.php';
 require '../controller/Autoloader.php';
@@ -31,8 +32,11 @@ $router->map('GET', '/user/[i:id]', 'user', 'user');
 $router->map('GET', '/user/update/[i:id]', 'userUpdate', 'userUpdate');
 $router->map('GET', '/collection/[i:id]', 'collection', 'collection');
 $router->map('GET', '/managemypools', 'managemypools', 'managemypools');
+$router->map('GET', '/create', 'create', 'create');
+$router->map('POST', '/create', 'created', 'created');
 $router->map('GET', '/connexion', 'connexion', 'connexion');
-
+$router->map('GET', '/edit/[i:id]', 'edit', 'edit');
+$router->map('POST', '/edit/[i:id]', 'edited', 'edited');
 $router->map('GET', '/search', 'search', 'search');
 
 $match = $router->match();
@@ -44,7 +48,7 @@ $match ['param'] -> request _GET or _POST
 if (is_array($match)) {
 
     $params = $match['params'];
-    //var_dump($params);
+    var_dump($params);
 
 
     if ($match['target'] === 'user') {
@@ -72,6 +76,27 @@ if (is_array($match)) {
         $controller = new Nathel\ManagePoolsController();
         $controller->showManagePools();
     }
+    if ($match['target'] === 'create') {
+
+        $controller = new Nathel\CreateCollectionController();
+        $controller->show();
+    }
+    if ($match['target'] === 'created') {
+
+        $controller = new Nathel\CreateCollectionController();
+        $controller->showcreated();
+    }
+    if ($match['target'] === 'edit') {
+
+        $controller = new Nathel\ManagePoolsController();
+        $controller->show_edit();
+    }
+    if ($match['target'] === 'edited') {
+
+        $controller = new Nathel\ManagePoolsController();
+        $controller->show_edited();
+    }
+
     if ($match['target'] === 'connexion') {
 
         \Nathel\ConnexionController::login_button();

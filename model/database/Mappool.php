@@ -65,6 +65,7 @@ class Mappool extends Dbh{
         $stmt = $this->connectToDb()->prepare('SELECT * FROM mappool_maps WHERE mappool_id = :mappool_id ORDER BY mode');
         $stmt->bindParam(':mappool_id', $this->id);
         $stmt->execute();
+        echo'flag';
         return $stmt->fetchAll();
     }
 
