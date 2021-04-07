@@ -8,16 +8,21 @@ require '../controller/Autoloader.php';
 \Nathel\Autoloader::Register();
 
 /* ACTIVE THIS WHEN YOU WANT TO DEBUG */
-// echo'<br><br><br><br>';
+echo'<br><br><br><br>';
 
 /* STARTING USER SESSION AND REFRESH USER CONNECTION*/
 session_start();
 
 if (isset($_SESSION['OsuApi']) === False){
+
     $_SESSION['OsuApi'] = new \Nathel\OsuApi(); // A term, bascu user token de osu api dans classe user
+
 }
 
+
+
 \Nathel\ConnexionController::verif_login_page();
+
 
 
 /* ROOTING MAP*/
@@ -48,7 +53,7 @@ $match ['param'] -> request _GET or _POST
 if (is_array($match)) {
 
     $params = $match['params'];
-    var_dump($params);
+
 
 
     if ($match['target'] === 'user') {

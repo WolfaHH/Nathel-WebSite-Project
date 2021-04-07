@@ -9,7 +9,7 @@ class OsuApi
     const SECRET = 'kB9lkO0UUgvjdOmizgHUE5FJdM1d6JpTCJG0UFGr';
     const URI = 'https://af0c9df32920.ngrok.io/connexion';
 
-    protected $current_credentials_token;
+    public $current_credentials_token;
     protected $user_token;
 
 
@@ -24,6 +24,7 @@ class OsuApi
                 "grant_type"    => "client_credentials",
                 "scope" => "public",
             ];
+
         else:
             $payload = [
                 "client_id"     => self::CLIENT_ID,
@@ -32,6 +33,7 @@ class OsuApi
                 "redirect_uri" => self::URI,
                 "code" => $code
             ];
+
             endif;
 
 
@@ -54,7 +56,9 @@ class OsuApi
 
 
         if ($code==null): // Public Token
-            $this->current_credentials_token = $response;
+
+            $this->current_credentials_token = $response['access_token'];
+
         else: // User authentification token
             return $response['access_token'];
         endif;
@@ -122,6 +126,14 @@ class OsuApi
 
         $endpoint = 'https://osu.ppy.sh/api/v2/me/osu';
         return self::apiQueryGET($token=1, $endpoint);
+    }
+    public function getBeatmapInfo($map_id){
+        $this->getToken(null);
+
+
+        $endpoint = 'https://osu.ppy.sh/api/v2/beatmaps/'.$map_id;
+
+        return self::apiQueryGET($token=0, $endpoint);
     }
 
     public function getUserRecentActivity($user_id, $limit=12, $offset=1)

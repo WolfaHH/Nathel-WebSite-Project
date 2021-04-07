@@ -62,10 +62,9 @@ class Mappool extends Dbh{
 
     public function GetMaps()
     {
-        $stmt = $this->connectToDb()->prepare('SELECT * FROM mappool_maps WHERE mappool_id = :mappool_id ORDER BY mode');
+        $stmt = $this->connectToDb()->prepare('SELECT * FROM mappool_maps WHERE mappool_id = :mappool_id');
         $stmt->bindParam(':mappool_id', $this->id);
         $stmt->execute();
-        echo'flag';
         return $stmt->fetchAll();
     }
 
@@ -86,11 +85,19 @@ class Mappool extends Dbh{
         return $stmt->fetch();
     }
 
+    public static function updateMapUrl($map_id, $pool_id, $new){
+        $dbh = self::connectToDb();
+        $stmt = $dbh->prepare('UPDATE mappool_maps SET map_id = :new WHERE map_id = :map_id AND mappool_id = :mappool_id');
+        $stmt->bindParam(':mappool_id', $pool_id);
+        $stmt->bindParam(':map_id', $map_id);
+        $stmt->bindParam(':new', $new);
+        return $stmt->execute();
+    }
 
     public function UpdateMapMode($data)
     {
         $dbh = self::connectToDb();
-        $stmt = $dbh->prepare('UPDATE mappool_maps SET mode = :mode WHERE id = :id AND map_id = :map_id');
+        $stmt = $dbh->prepare('UPDATE mappool_maps SET mode = :mode WHERE mappool_id = :id AND map_id = :map_id');
         $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':map_id', $data['map_id']);
         $stmt->bindParam(':mode', $data['mode']);
@@ -118,12 +125,42 @@ class Mappool extends Dbh{
     public function UpdateName($name)
     {
         $dbh = self::connectToDb();
-        $stmt = $dbh->prepare('UPDATE mappools SET updated_at = :updated_at WHERE id = :id');
+        $stmt = $dbh->prepare('UPDATE mappools SET name = :name WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':name', $name);
         return $stmt->execute();
     }
 
+    public static function storeNewPool($data)
+    {
+
+        $data['col_id'] = (int)$data['col_id'];
+
+        $dbh = self::connectToDb();
+        $stmt = $dbh->prepare('INSERT INTO mappools (collection_id, name, thumbnail, user_id) VALUES (:col_id, :name, :thumbnail, :user_id) ');
+        $stmt->bindParam(':col_id', $data['col_id']);
+        $stmt->bindParam(':name', $data['name']);
+        $stmt->bindParam(':user_id', $data['user_id']);
+        $stmt->bindParam(':thumbnail', $data['thumbnail']);
+        $stmt->execute();
+
+
+    }
+
+    public static function storeNewMappool_maps($data)
+    {
+
+        $dbh = self::connectToDb();
+        $stmt = $dbh->prepare('INSERT INTO mappool_maps (mappool_id, map_id, user_id, mode, position) VALUES (:pool_id, :map_id, :user_id, :mode, :position)');
+        $stmt->bindParam(':mode', $data['mode']);
+        $stmt->bindParam(':pool_id', $data['pool_id']);
+        $stmt->bindParam(':user_id', $data['user_id']);
+        $stmt->bindParam(':map_id', $data['map_id']);
+        $stmt->bindParam(':position', $data['position']);
+        $stmt->execute();
+
+
+    }
 
     public function DeleteMappool()
     {

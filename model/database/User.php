@@ -74,6 +74,14 @@ class User extends Dbh
         return $stmt->fetch();
     }
 
+    public static function getUserbyName($name)
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE name = :name');
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public static function checkUser($id)
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM users WHERE osu_id = :id');
@@ -206,7 +214,7 @@ class User extends Dbh
     public function storeContributor($collection_id)
     {
         $stmt = self::connectToDb()->prepare('INSERT INTO contributors (user_id, collection_id) VALUES (:user_id, :collection_id)');
-        $stmt->bindParam(':user_id', $this->id);
+        $stmt->bindParam(':user_id', $this->osu_id);
         $stmt->bindParam(':collection_id', $collection_id);
         $stmt->execute();
     }
@@ -286,8 +294,9 @@ class User extends Dbh
 
     public function deleteContributor($collection_id)
     {
+
         $stmt = self::connectToDb()->prepare('DELETE FROM contributors WHERE user_id = :user_id AND collection_id = :collection_id');
-        $stmt->bindParam(':user_id', $this->id);
+        $stmt->bindParam(':user_id', $this->osu_id);
         $stmt->bindParam(':collection_id', $collection_id);
         $stmt->execute();
     }

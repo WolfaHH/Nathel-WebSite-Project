@@ -1,61 +1,57 @@
-<form action="">
-    <div class="form-floating mb-3">
-        <label>Name</label>
-        <input type="text" value="<?php echo $collection->description ?>" >
-    </div>
-    <div class="form-floating">
-        <label>Description</label>
-        <input type="text" value="<?php echo $collection->name;?>">
-    </div>
-    <div>
-        <br>
-        <label>Tags de la collection</label>
-        <?php foreach($tags as $tag): ?>
-        <?php echo $tag['name'];?>
-        <?php endforeach;?>
-        <br>
-        <label> Ajouter un tag</label>
-        <?php foreach($Tags as $tag): ?>
-            <button type="submit">
-                <p>
-                    <?php echo $tag['name']; ?>
-                </p>
-            </button>
-        <?php endforeach;?>
-        <br>
-        <label> Supprimer un tag</label>
-        <?php foreach($Tags as $tag): ?>
-            <button name="<?php echo $tag['name'] ?>">
-                <p>
-                    <?php echo $tag['name']; ?>
-                </p>
-            </button>
-        <?php endforeach;?>
-
-    </div>
-
-    <div>
-        <label>Current contributors</label>
-        <?php foreach($contributors as $contributor): ?>
-            <?php echo $contributor->name; ?>
-        <?php endforeach;?>
-        <br>
-        <label>Add a contributor</label>
-        <input name="contributor" type="text">
-        <br>
-        <label>Remove a contributor</label>
-        <?php foreach($contributors as $contributor): ?>
-            <button name="contributor_remove""<?php echo $contributor->name ?>">
-                <p>
-                    <?php echo $contributor->name; ?>
-                </p>
-            </button>
-        <?php endforeach;?>
-
-
-    </div>
-
-    <br>
-    <button type="submit">update</button>
-
+<form action="../edit/<?php echo $collection_id[0][0];?>" method="post">
+    <label>Name</label>
+    <input type="text" value="<?php echo $collection->name ?>" name="name" >
+    <input type="submit" value="Submit">
 </form>
+<form action="../edit/<?php echo $collection_id[0][0];?>" method="post">
+    <label>Description</label>
+    <input type="text" value="<?php echo $collection->description;?>" name="description">
+    <input type="submit" value="Submit">
+</form>
+    <br>
+    <label>Tags de la collection</label>
+    <?php foreach($tags as $tag): ?>
+        <?php echo $tag['name'];?>
+    <?php endforeach;?>
+    <br>
+<form action="../edit/<?php echo $collection_id[0][0];?>" method="post">
+    <label> Ajouter un tag</label>
+    <?php foreach($Tags as $tag): ?>
+        <button type="submit" name="addtag" value="<?php echo $tag['id'] ?>">
+                <?php echo $tag['name']; ?>
+
+        </button>
+    <?php endforeach;?>
+    <input type="submit" value="Submit">
+    <br>
+</form>
+<form action="../edit/<?php echo $collection_id[0][0];?>" method="post">
+    <label> Supprimer un tag</label>
+    <?php foreach($Tags as $tag): ?>
+        <button value="<?php echo $tag['id'] ?>" name="removetag">
+                <?php echo $tag['name']; ?>
+
+        </button>
+    <?php endforeach;?>
+    <input type="submit" value="Submit">
+</form>
+<label>Current contributors</label>
+<?php foreach($contributors as $contributor): ?>
+    <?php echo $contributor->name; ?>
+<?php endforeach;?>
+<br>
+<form action="../edit/<?php echo $collection_id[0][0];?>" method="post">
+    <label>Add a contributor</label>
+    <input name="addcontributor" type="text">
+    <input type="submit" value="Submit">
+    <br>
+</form>
+<form action="../edit/<?php echo $collection_id[0][0];?>" method="post">
+    <label>Remove a contributor</label>
+    <?php foreach($contributors as $contributor): ?>
+        <button type="submit" name="removecontributor" value="<?php echo $contributor->osu_id;?>">
+            <?php echo $contributor->name; ?>
+        </button>
+    <?php endforeach;?>
+</form>
+

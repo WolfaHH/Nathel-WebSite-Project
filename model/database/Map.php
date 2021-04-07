@@ -3,6 +3,8 @@
 namespace Nathel;
 
 
+use Cassandra\Exception\TruncateException;
+
 class Map extends Dbh{
 
     public $id;
@@ -45,6 +47,37 @@ class Map extends Dbh{
         return $stmt->fetchAll();
     }
 
+    public static function checkMapWithUrl($url)
+    {
+        $last_occur = strripos($url, "/");
+        $ur = substr($url,$last_occur+1);
+        $ur = '%'.$ur.'%';
+        $stmt = self::connectToDb()->prepare('SELECT * FROM beatmaps WHERE url LIKE :url');
+        $stmt->bindParam(':url', $ur);
+        $stmt->execute();
+        $data = $stmt->fetchALL();
+        if (count($data) >= 1){
+            return True;
+        }else{
+            return False;
+        }
+
+    }
+    public static function getMapWithUrl($url)
+    {
+        $last_occur = strripos($url, "/");
+        $ur = substr($url,$last_occur+1);
+        $ur = '%'.$ur.'%';
+
+        $stmt = self::connectToDb()->prepare('SELECT * FROM beatmaps WHERE url LIKE :url');
+        $stmt->bindParam(':url', $ur);
+        $stmt->execute();
+        return $stmt->fetch()['id'];
+
+    }
+
+
+
     public static function getMapbyscore($mappool_map_id)
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappool_maps mm INNER JOIN beatmaps b on mm.map_id = b.id INNER JOIN beatmapsets b2 on b.beatmapset_id = b2.id WHERE mm.id = :mappool_map_id');
@@ -60,10 +93,20 @@ class Map extends Dbh{
         $stmt->execute();
         return $stmt->fetch();
     }
-
+    public static function StoreMapset($data)
+    {
+        $dbh = self::connectToDb();
+        $stmt = $dbh->prepare('INSERT INTO beatmapsets (name, creator, artist) VALUES (:name, :creator, :artist)');
+        $stmt->bindParam(':name', $data['name']);
+        $stmt->bindParam(':creator', $data['creator']);
+        $stmt->bindParam(':artist', $data['artist']);
+        $stmt->execute();
+        return $dbh->lastInsertId();
+    }
     public static function StoreMap($data)
     {
-        $stmt = self::connectToDb()->prepare('INSERT INTO maps (beatmapset_id, bpm, ar, cs, drain, accuracy, hit_length, mode_int, url, difficulty ) VALUES (:beatmapset_id, :bpm, :ar, :cs, :drain, :accuracy, :hit_length, :mode_int, :url, :difficulty)');
+        $dbh = self::connectToDb();
+        $stmt = $dbh->prepare('INSERT INTO beatmaps (beatmapset_id, bpm, ar, cs, drain, accuracy, hit_length, mode_int, url, difficulty ) VALUES (:beatmapset_id, :bpm, :ar, :cs, :drain, :accuracy, :hit_length, :mode_int, :url, :difficulty)');
         $stmt->bindParam(':beatmapset_id', $data['beatmapset_id']);
         $stmt->bindParam(':bpm', $data['bpm']);
         $stmt->bindParam(':ar', $data['ar']);
@@ -75,6 +118,7 @@ class Map extends Dbh{
         $stmt->bindParam(':url', $data['url']);
         $stmt->bindParam(':difficulty', $data['difficulty']);
         $stmt->execute();
+        return $dbh->lastInsertId();
     }
 
     public function DeleteMap()

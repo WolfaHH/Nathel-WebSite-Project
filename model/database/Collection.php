@@ -157,9 +157,11 @@ class Collection extends Dbh
 
     public function storeCollectionTag($tag_id)
     {
+
         $stmt = self::connectToDb()->prepare('INSERT INTO collection_tags (collection_id, tag_id) VALUES (:collection_id, :tag_id)');
         $stmt->bindParam(':collection_id', $this->id);
         $stmt->bindParam(':tag_id', $tag_id);
+
         $stmt->execute();
     }
 
@@ -173,7 +175,7 @@ class Collection extends Dbh
         return $stmt->execute();
     }
 
-    private function updateDescription(): bool
+    public function updateDescription($description): bool
     {
         $stmt = self::connectToDb()->prepare('UPDATE collections SET description = :description, updated_at = NOW() WHERE id = :id');
         $stmt->bindParam(':id', $this->id);
@@ -208,6 +210,13 @@ class Collection extends Dbh
         $stmt->bindParam(':id', $this->id);
         $stmt->execute();
     }
+    public function deleteCollectionTag($tag)
+    {
+        $stmt = self::connectToDb()->prepare('DELETE FROM collection_tags WHERE collection_id = :id AND tag_id = :tag_id');
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':tag_id', $tag);
+        $stmt->execute();
+    }
 
     private function deleteCollectionContributors()
     {
@@ -235,9 +244,9 @@ class Collection extends Dbh
             foreach($filters as $filter){
                 $s.=' '.$filter.' AND ';
             }
-            var_dump($s);
+
             $s = substr($s, 0, -5);
-            var_dump($s);
+
 
             $stmt = self::connectToDb()->prepare('SELECT DISTINCT * FROM collections cl 
                                                         INNER JOIN collection_tags ct ON cl.id = ct.collection_id

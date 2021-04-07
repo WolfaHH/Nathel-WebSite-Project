@@ -4,7 +4,6 @@
     echo "bla";
 
     foreach ($collections as $collection_user) {
-        var_dump($collection_user);
         $collection = new \Nathel\Collection($collection_user['id']);
         \Nathel\CollectionView::showV2($collection);
     }
