@@ -27,7 +27,7 @@ class SearchCollectionsController extends Controller
         #pour l'instant seul les critères catégorie et game mod sont appliqués
 
 
-        if (isset($_GET['gm']) or isset($_GET['category'])){
+        if (isset($_GET['gm']) or isset($_GET['category[]'])){
             $filters = array();
             if (isset($_GET['gm'])){
                 array_push($filters, $_GET['gm']);
@@ -42,17 +42,16 @@ class SearchCollectionsController extends Controller
 
 
         #Cas ou la recherche est standard par popularité, avec donc possibilité de filtrer
-        if (isset($_GET['search']) == False){
-            if (strlen($_GET['search']) == 0) {
-                if (isset($filters) == False){
-                    $collections = Collection::getMostPopular();
+
+        if ((array_key_exists('search',$_GET) === False) or (strlen($_GET['search'])===0)){
+            if ((array_key_exists('gm',$_GET) === False) and (array_key_exists('category[]',$_GET) === False)) {
+                $collections = Collection::getMostPopular();
                 }
                 else{
-
                     $collections = Collection::getMostPopular($filters);
                 }
             }
-        }
+
 
 
         #cas ou la recherche est par mot clés, avec impossibilité d'utiliser les filtres pour le moment

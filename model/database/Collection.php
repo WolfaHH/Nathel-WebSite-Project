@@ -235,29 +235,50 @@ class Collection extends Dbh
     //Search bar query :
 
 
-    public static function getMostPopular($filters=array())
+    public static function getMostPopular($filters=False)
     {
-        if ($filters == array()){
+        //$filters = [11,6,7,2];
+        if ($filters === False){
+
             $stmt = self::connectToDb()->prepare('SELECT * FROM mappools mp INNER JOIN collections cl ON mp.collection_id = cl.id ORDER BY mp.follow');
+            $stmt->execute();
+            $result = $stmt->fetchAll();
         }else{
-            $s = "";
-            foreach($filters as $filter){
-                $s.=' '.$filter.' AND ';
-            }
-
-            $s = substr($s, 0, -5);
-
 
             $stmt = self::connectToDb()->prepare('SELECT DISTINCT * FROM collections cl 
                                                         INNER JOIN collection_tags ct ON cl.id = ct.collection_id
-                                                        WHERE ct.tag_id = :suite');
+                                                        WHERE ct.tag_id =:suite');
 
-            $stmt->bindParam(':suite', $s);
+            $stmt->bindParam(':suite', $filters[0]);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+
+            $filters = array_slice($filters,1);
+            foreach($filters as $filter){
+                $ids = array();
+                foreach ($result as $col){
+                    array_push($ids, $col['collection_id']);
+
+
+                }
+                $ids = implode($ids, ',');
+                $query = 'SELECT DISTINCT * FROM collections cl 
+                                                        INNER JOIN collection_tags ct ON cl.id = ct.collection_id
+                                                        WHERE ct.tag_id = :suite AND cl.id IN '.'('.$ids.')';
+                $stmt = self::connectToDb()->prepare($query);
+
+                $stmt->bindParam(':suite', $filter);
+                //$stmt->bindParam(':suite2', $ids);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+            }
+
+
+
+
         }
 
-        $stmt->execute();
-        //var_dump($stmt->fetchAll());
-        return $stmt->fetchAll();
+        return $result;
     }
 
 

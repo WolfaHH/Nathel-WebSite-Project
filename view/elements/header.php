@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/assets/css/app.css" rel="stylesheet" type="text/css">
 
+
+
+
     <title>Nathel Mappools</title>
 </head>
 <body>

@@ -8,7 +8,7 @@ require '../controller/Autoloader.php';
 \Nathel\Autoloader::Register();
 
 /* ACTIVE THIS WHEN YOU WANT TO DEBUG */
-echo'<br><br><br><br>';
+//echo'<br><br><br><br>';
 
 /* STARTING USER SESSION AND REFRESH USER CONNECTION*/
 session_start();
@@ -43,6 +43,7 @@ $router->map('GET', '/connexion', 'connexion', 'connexion');
 $router->map('GET', '/edit/[i:id]', 'edit', 'edit');
 $router->map('POST', '/edit/[i:id]', 'edited', 'edited');
 $router->map('GET', '/search', 'search', 'search');
+$router->map('GET', '/parcoursup', 'parcoursup', 'parcoursup');
 
 $match = $router->match();
 
@@ -110,6 +111,8 @@ if (is_array($match)) {
 
         \Nathel\SearchCollectionsController::showSearchCollections();
     }
+
+
 
 
 /*
