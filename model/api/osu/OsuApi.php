@@ -7,7 +7,7 @@ class OsuApi
 {
     const CLIENT_ID = 4227;
     const SECRET = 'kB9lkO0UUgvjdOmizgHUE5FJdM1d6JpTCJG0UFGr';
-    const URI = 'https://af0c9df32920.ngrok.io/connexion';
+    const URI = 'http://mappool-website-project.nath/connexion';
 
     public $current_credentials_token;
     protected $user_token;
@@ -26,6 +26,7 @@ class OsuApi
             ];
 
         else:
+
             $payload = [
                 "client_id"     => self::CLIENT_ID,
                 "client_secret" => self::SECRET,

@@ -8,7 +8,7 @@ require '../controller/Autoloader.php';
 \Nathel\Autoloader::Register();
 
 /* ACTIVE THIS WHEN YOU WANT TO DEBUG */
-//echo'<br><br><br><br>';
+
 
 /* STARTING USER SESSION AND REFRESH USER CONNECTION*/
 session_start();
@@ -23,6 +23,7 @@ if (isset($_SESSION['OsuApi']) === False){
 
 \Nathel\ConnexionController::verif_login_page();
 
+//echo'<br><br><br><br>';
 
 
 /* ROOTING MAP*/
@@ -36,14 +37,14 @@ $router->map('GET', '/blog/[*:slug]-[i:id]', 'blog/article', 'article');
 $router->map('GET', '/user/[i:id]', 'user', 'user');
 $router->map('GET', '/user/update/[i:id]', 'userUpdate', 'userUpdate');
 $router->map('GET', '/collection/[i:id]', 'collection', 'collection');
-$router->map('GET', '/managemypools', 'managemypools', 'managemypools');
 $router->map('GET', '/create', 'create', 'create');
 $router->map('POST', '/create', 'created', 'created');
+$router->map('GET', '/yourpools', 'yourpools', 'yourpools');
 $router->map('GET', '/connexion', 'connexion', 'connexion');
 $router->map('GET', '/edit/[i:id]', 'edit', 'edit');
 $router->map('POST', '/edit/[i:id]', 'edited', 'edited');
 $router->map('GET', '/search', 'search', 'search');
-$router->map('GET', '/parcoursup', 'parcoursup', 'parcoursup');
+
 
 $match = $router->match();
 
@@ -51,6 +52,7 @@ $match = $router->match();
 $match ['param'] -> request _GET or _POST
  */
 
+//$_SESSION['user']->osu_id = 1;
 if (is_array($match)) {
 
     $params = $match['params'];
@@ -77,8 +79,9 @@ if (is_array($match)) {
         $controller->showCollectionPage($params);
     }
 
-    if ($match['target'] === 'managemypools') {
+    if ($match['target'] === 'yourpools') {
 
+        \Nathel\User::checkLogged();
         $controller = new Nathel\ManagePoolsController();
         $controller->showManagePools();
     }

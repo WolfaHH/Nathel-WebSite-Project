@@ -240,9 +240,10 @@ class Collection extends Dbh
         //$filters = [11,6,7,2];
         if ($filters === False){
 
-            $stmt = self::connectToDb()->prepare('SELECT * FROM mappools mp INNER JOIN collections cl ON mp.collection_id = cl.id ORDER BY mp.follow');
+            $stmt = self::connectToDb()->prepare('SELECT DISTINCT * FROM mappools mp INNER JOIN collections cl ON mp.collection_id = cl.id ORDER BY mp.follow');
             $stmt->execute();
             $result = $stmt->fetchAll();
+
         }else{
 
             $stmt = self::connectToDb()->prepare('SELECT DISTINCT * FROM collections cl 
@@ -277,7 +278,6 @@ class Collection extends Dbh
 
 
         }
-
         return $result;
     }
 

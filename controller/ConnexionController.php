@@ -44,12 +44,12 @@ abstract class ConnexionController extends Controller
         $_SESSION['user']->token = $token;
 
 
-        if (isset($_SESSION['REQUEST_URI'])){
-            $ch = $_SESSION['REQUEST_URI'];
-            header('Location: ' . $ch);
-        }else{
+        //if (isset($_SESSION['REQUEST_URI'])){
+          //  $ch = $_SESSION['REQUEST_URI'];
+            //header('Location: ' . $ch);
+        //}else{
             header('Location: /');
-        }
+        //}
 
     }
 

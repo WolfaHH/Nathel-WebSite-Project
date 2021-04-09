@@ -137,12 +137,12 @@
 
                 <!-- FOR MOBILE ONLY -->
                 <li class="nav-item d-sm-none">
-                    <a href="#" class="nav-link active">
-                        <?php if (isset($_SESSION['user'])): ?>
+                    <a href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=http://mappool-website-project.nath/connexion&scope=public" class="nav-link active">
+                        <?php if (strlen($_SESSION['user']->osu_id) > 2): ?>
                             <img class="svg" src=<?php echo $_SESSION['user']->thumbnail; ?>>
 
                             <a class="text"
-                               href= <?php echo "https://af0c9df32920.ngrok.io/user/" . $_SESSION['user']->osu_id; ?>>Profile</a>
+                               href= <?php echo "http://mappool-website-project.nath/user/" . $_SESSION['user']->osu_id; ?>>Profile</a>
                         <?php else: ?>
                         <svg class="svg" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -181,13 +181,13 @@
 
 
             <div class="mr-1 nav-item">
-                <a href="#" class="nav-link active">
+                <a href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=http://mappool-website-project.nath/connexion&scope=public" class="nav-link active">
 
-                    <?php if (isset($_SESSION['user'])): ?>
+                    <?php if (strlen($_SESSION['user']->osu_id) > 2): ?>
                         <img class="svg" src=<?php echo $_SESSION['user']->thumbnail; ?>>
 
                         <a class="text"
-                           href= <?php echo "https://af0c9df32920.ngrok.io/user/" . $_SESSION['user']->osu_id; ?>>Profile</a>
+                           href= <?php echo "http://mappool-website-project.nath/user/" . $_SESSION['user']->osu_id; ?>>Profile</a>
                     <?php else: ?>
                     <svg class=" svg" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"

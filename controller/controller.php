@@ -12,7 +12,7 @@ Abstract class Controller
         }
     }
 
-    protected static function storeURI(){
+    public static function storeURI(){
         $_SESSION['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
 
     }
