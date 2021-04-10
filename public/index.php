@@ -1,13 +1,29 @@
 <?php
 
+/******************** NameSpace *********************/
+namespace Nathel\Osu\Controller\Mappool;
+
 
 /* LOADING OBJECT */
-require '../vendor/autoload.php';
-require '../controller/Autoloader.php';
+require_once realpath('../vendor/autoload.php');
+//require '../controller/Autoloader.php';
 
-\Nathel\Autoloader::Register();
+
+
+/******************** Class Alias *********************/
+use Nathel\Osu\Controller\Mappool as Control;
+use Nathel\Osu\Model\Mappool\Api;
+use Nathel\Osu\Model\Mappool\Database as Data;
+use Nathel\Osu\View\Mappool as View;
+use AltoRouter;
+
+//die('je meurs bruhhhh');
+
+// \Nathel\Autoloader::Register();
 
 /* ACTIVE THIS WHEN YOU WANT TO DEBUG */
+//echo'<br><br><br><br>';
+
 
 
 /* STARTING USER SESSION AND REFRESH USER CONNECTION*/
@@ -15,15 +31,14 @@ session_start();
 
 if (isset($_SESSION['OsuApi']) === False){
 
-    $_SESSION['OsuApi'] = new \Nathel\OsuApi(); // A term, bascu user token de osu api dans classe user
+    $_SESSION['OsuApi'] = new Api\OsuApi(); // A term, bascu user token de osu Api dans classe user
 
 }
 
 
 
-\Nathel\ConnexionController::verif_login_page();
+Control\ConnexionController::verif_login_page();
 
-//echo'<br><br><br><br>';
 
 
 /* ROOTING MAP*/
@@ -60,59 +75,59 @@ if (is_array($match)) {
 
 
     if ($match['target'] === 'user') {
-        $controller = new Nathel\UserController();
+        $controller = new Control\UserController();
         $controller->showUser($params);
     }
 
-    if ($match['target'] === 'userUpdate') {
-        $controller = new Nathel\UserController();
+    if ($match['target'] === 'userUpdate') { // Utilité ?
+        $controller = new Control\UserController();
         $controller->Update(); // a f aire
     }
 
     if ($match['target'] === 'home') {
-        $controller = new Nathel\HomeController();
+        $controller = new Control\HomeController();
         $controller->showHome();
     }
     if ($match['target'] === 'collection') {
 
-        $controller = new Nathel\CollectionController();
+        $controller = new Control\CollectionController();
         $controller->showCollectionPage($params);
     }
 
     if ($match['target'] === 'yourpools') {
 
         \Nathel\User::checkLogged();
-        $controller = new Nathel\ManagePoolsController();
+        $controller = new Control\ManagePoolsController();
         $controller->showManagePools();
     }
     if ($match['target'] === 'create') {
 
-        $controller = new Nathel\CreateCollectionController();
+        $controller = new Control\CreateCollectionController();
         $controller->show();
     }
     if ($match['target'] === 'created') {
 
-        $controller = new Nathel\CreateCollectionController();
+        $controller = new Control\CreateCollectionController();
         $controller->showcreated();
     }
     if ($match['target'] === 'edit') {
 
-        $controller = new Nathel\ManagePoolsController();
+        $controller = new Control\ManagePoolsController();
         $controller->show_edit();
     }
     if ($match['target'] === 'edited') {
 
-        $controller = new Nathel\ManagePoolsController();
+        $controller = new Control\ManagePoolsController();
         $controller->show_edited();
     }
 
     if ($match['target'] === 'connexion') {
 
-        \Nathel\ConnexionController::login_button();
+        Control\ConnexionController::login_button();
     }
     if ($match['target'] === 'search') {
 
-        \Nathel\SearchCollectionsController::showSearchCollections();
+        Control\SearchCollectionsController::showSearchCollections();
     }
 
 
@@ -126,5 +141,5 @@ if (is_array($match)) {
     }
 */
 } else {
-    \Nathel\Controller::error();
+    Control\Controller::error();
 }
