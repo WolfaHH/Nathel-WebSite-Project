@@ -138,7 +138,7 @@
                 <!-- FOR MOBILE ONLY -->
                 <li class="nav-item d-sm-none">
                     <a href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=http://mappool-website-project.nath/connexion&scope=public" class="nav-link active">
-                        <?php if (strlen($_SESSION['user']->osu_id) > 2): ?>
+                        <?php if (isset($_SESSION['user']) && strlen($_SESSION['user']->osu_id) > 2): ?>
                             <img class="svg" src=<?php echo $_SESSION['user']->thumbnail; ?>>
 
                             <a class="text"
@@ -183,7 +183,7 @@
             <div class="mr-1 nav-item">
                 <a href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=http://mappool-website-project.nath/connexion&scope=public" class="nav-link active">
 
-                    <?php if (strlen($_SESSION['user']->osu_id) > 2): ?>
+                    <?php if (isset($_SESSION['user']) && strlen($_SESSION['user']->osu_id) > 2): ?>
                         <img class="svg" src=<?php echo $_SESSION['user']->thumbnail; ?>>
 
                         <a class="text"

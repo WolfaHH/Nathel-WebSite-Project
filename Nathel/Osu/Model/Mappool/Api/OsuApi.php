@@ -61,7 +61,8 @@ class OsuApi
             $this->current_credentials_token = $response['access_token'];
 
         else: // User authentification token
-            return $response['access_token'];
+            var_dump($response);
+           return $response['access_token'];
         endif;
 
     }
@@ -100,12 +101,15 @@ class OsuApi
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => $header_tmp,
-            CURLOPT_POSTFIELDS => $body,
+            CURLOPT_POSTFIELDS => $body
         ));
 
         $response = curl_exec($curl);
 
+
         curl_close($curl);
+        var_dump(json_decode($response, true));
+        die();
         return json_decode($response, true);
 
     }
@@ -126,6 +130,7 @@ class OsuApi
         $this->user_token = $token_user;
 
         $endpoint = 'https://osu.ppy.sh/Api/v2/me/osu';
+        var_dump(self::apiQueryGET($token=1, $endpoint));
         return self::apiQueryGET($token=1, $endpoint);
     }
     public function getBeatmapInfo($map_id){

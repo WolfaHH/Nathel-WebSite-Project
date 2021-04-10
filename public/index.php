@@ -22,7 +22,7 @@ use AltoRouter;
 // \Nathel\Autoloader::Register();
 
 /* ACTIVE THIS WHEN YOU WANT TO DEBUG */
-//echo'<br><br><br><br>';
+echo'<br><br><br><br>';
 
 
 
@@ -66,7 +66,7 @@ $match = $router->match();
 /*
 $match ['param'] -> request _GET or _POST
  */
-
+var_dump($_SESSION);
 //$_SESSION['user']->osu_id = 1;
 if (is_array($match)) {
 

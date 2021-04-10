@@ -5,7 +5,7 @@ namespace Nathel\Osu\Controller\Mappool;
 
 /******************** Class Alias *********************/
 use Nathel\Osu\Controller\Mappool as Control;
-use Nathel\Osu\Model\Mappool\Api;
+use Nathel\Osu\Model\Mappool\Api as Api;
 use Nathel\Osu\Model\Mappool\Database as Data;
 use Nathel\Osu\View\Mappool as View;
 

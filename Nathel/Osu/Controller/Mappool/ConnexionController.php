@@ -50,6 +50,9 @@ abstract class ConnexionController extends Controller
         $_SESSION['user'] = new Data\User($id);
         $_SESSION['user']->token = $token;
 
+        var_dump($_SESSION);
+        die('je meurs bruuuh');
+
 
         //if (isset($_SESSION['REQUEST_URI'])){
           //  $ch = $_SESSION['REQUEST_URI'];
