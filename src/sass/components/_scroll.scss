@@ -27,10 +27,16 @@ $animDuration: 5s;
 }
 
 .scroll {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: $breakpoint-lg) {
+  .scroll {
+    display: flex;
+  }
 }
 
 .scroll-text {

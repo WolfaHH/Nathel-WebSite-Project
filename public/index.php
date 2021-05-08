@@ -46,7 +46,7 @@ Control\ConnexionController::verif_login_page();
 $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
 
-$router->map('GET', '/', 'home');
+$router->map('GET', '/', 'home', 'mappool');
 $router->map('GET', '/contact', 'contact', 'contact');
 $router->map('GET', '/blog/[*:slug]-[i:id]', 'blog/article', 'article');
 $router->map('GET', '/user/[i:id]', 'user', 'user');
@@ -61,8 +61,7 @@ $router->map('POST', '/edit/[i:id]', 'edited', 'edited');
 $router->map('GET', '/search', 'search', 'search');
 
 
-$match = $router->match();
-
+$_SESSION ['match'] = $match = $router->match();
 /*
 $match ['param'] -> request _GET or _POST
  */

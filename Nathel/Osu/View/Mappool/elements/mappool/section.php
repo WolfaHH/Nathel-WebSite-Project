@@ -5,9 +5,9 @@
 
     foreach ($mappools as $mappool_user) {
 
-        $mappool = new \Nathel\Mappool($mappool_user);
+        $mappool = new \Nathel\Osu\Model\Mappool\Database\Mappool($mappool_user);
 
-        \Nathel\MappoolView::show($mappool);
+        Nathel\Osu\View\Mappool\MappoolView::show($mappool);
     }
     ?>
 

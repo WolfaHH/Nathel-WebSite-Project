@@ -1,11 +1,14 @@
 .header-desktop {
-  margin-left: 100px;
-  background-color: $classic;
+
+  display: flex;
+  z-index: 9999;
+  background-color: $primary;
+  padding: 0 .2rem;
   position: fixed;
-  bottom: 0;
+  top: 0;
   align-items: center;
   justify-content: space-between;
-  width: calc(100vw - 100px);
+  width: 100vw;
   box-shadow: 0 -1px 2px 1px rgb(0, 0, 0, 0.25);
 
   ul {
@@ -13,9 +16,19 @@
     margin: auto;
   }
 }
-
 .header-side {
-  display: none;
+  position: fixed;
+  bottom: 0;
+}
+
+.navbar {
+  display : none;
+
+}
+
+.logo_nathel{
+  width: 44px;
+  height: 56px;
 }
 
 .nav-item {
@@ -79,18 +92,38 @@
   }
 }
 
-@media (min-width: $breakpoint-sm) {
+.mobile-burger {
+  height: 60px;
+  margin-left: auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  color: $gray;
+  fill: $secondary;
+  background: rgba(#087C9D, .5);
+}
+
+.mobile-burger span {
+  margin-right: 20px;
+}
+
+
+
+@media (min-width: $breakpoint-lg) {
 
   .header-desktop {
-    z-index: 9999;
-    top: 0;
+    background-color: $classic;
+    margin-left: 100px;
     bottom: unset;
     box-shadow: 0 1px 2px 1px rgb(0, 0, 0, 0.25);
+    width: calc(100vw - 100px);
     display: flex;
     padding-top: 5px;
 
     .logo_nathel{
-      margin: 0 1rem;
+      margin: -5px 1rem 0 1rem;
+      width: 79px;
+      height: 100px;
     }
 
     .nav-item {
@@ -195,7 +228,7 @@
       align-items: center;
       margin-bottom: 1rem;
 
-      .svg{
+      .menu{
         margin: auto;
         fill: $secondary;
       }

@@ -34,6 +34,7 @@
     border: none;
     padding: 0 1em;
     min-width: 100px;
+    color: $secondary;
 
     &::placeholder {
       color: $classic;
