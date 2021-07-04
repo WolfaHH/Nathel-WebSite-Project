@@ -19,12 +19,35 @@
 .header-side {
   position: fixed;
   bottom: 0;
+  width: 100vw;
+  font-size: .6rem;
+  background: $classic;
+
+  .slide-wrap {
+    display: none;
+  }
+
+  ul {
+    display: flex;
+  }
+  .nav-item {
+    padding: .4rem;
+
+    &:hover{
+      background-color: $dark;
+      box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-link{
+      .svg {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 5px;
+      }
+    }
+  }
 }
 
-.navbar {
-  display : none;
-
-}
 
 .logo_nathel{
   width: 44px;
@@ -44,7 +67,7 @@
     content: '';
     display: block;
     margin: auto;
-    height: 3px;
+    height: 1px;
     border-radius: $light-border;
     width: 0;
     background-color: transparent;
@@ -61,7 +84,7 @@
 
     .svg {
       fill: $secondary;
-      margin: auto;
+      margin: 0 auto 5px;
       width: 45px;
       height: 45px;
       grid-area: svg;
@@ -109,20 +132,20 @@
 
 
 
-@media (min-width: $breakpoint-lg) {
+@media (min-width: $breakpoint-md) {
 
   .header-desktop {
     background-color: $classic;
-    margin-left: 100px;
+    margin-left: 72px;
     bottom: unset;
     box-shadow: 0 1px 2px 1px rgb(0, 0, 0, 0.25);
-    width: calc(100vw - 100px);
+    width: calc(100vw - 72px);
     display: flex;
     padding-top: 5px;
 
     .logo_nathel{
       margin: -5px 1rem 0 1rem;
-      width: 79px;
+      width: 75px;
       height: 100px;
     }
 
@@ -134,6 +157,7 @@
 
       &:hover {
         background: $dark;
+        box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, 0.25);
 
         &:after {
           width: 70% !important;
@@ -212,12 +236,10 @@
   }
 
   .header-side {
-    font-size: 0.8rem;
     display: block;
-    position: fixed;
     top: 0;
     height: 100vh;
-    width: 100px;
+    width: 72px;
     background-color: $light;
     box-shadow: 1px 0 2px 1px rgb(0 0 0 / 25%);
 
@@ -233,17 +255,12 @@
         fill: $secondary;
       }
     }
+    ul {
+      display: block;
+    }
 
     .nav-item{
       padding: 0.5rem 0;
-
-      &:hover{
-        background-color: $dark;
-      }
-
-      .svg{
-        width: 30px;
-      }
     }
 
   }

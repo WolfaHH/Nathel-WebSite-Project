@@ -39,6 +39,7 @@ class HomeController extends Controller
         View\View::header();
         include '../Nathel/Osu/View/Mappool/elements/home/jumbotron.php';
         $this->showMappools();
+        View\View::footer();
 
 
 

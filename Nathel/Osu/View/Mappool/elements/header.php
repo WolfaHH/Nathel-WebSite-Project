@@ -35,10 +35,10 @@
             <path d="M39.502 59.2998C41.9873 59.2998 44.002 57.2851 44.002 54.7998C44.002 52.3145 41.9873 50.2998 39.502 50.2998C37.0167 50.2998 35.002 52.3145 35.002 54.7998C35.002 57.2851 37.0167 59.2998 39.502 59.2998Z"
                   fill="#DFEEF2"/>
         </svg>
-        <div class="menu"
-                onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"
-                aria-label="Main Menu">
-            <div class="mobile-burger d-lg-none">
+        <div id="mobile-menu" class="menu"
+             onclick="this.classList.toggle('opened');document.getElementById('dropdown-menu').classList.toggle('d-none');"
+             aria-label="Main Menu">
+            <div class="mobile-burger d-md-none">
                 <span><?= $_SESSION['match']['name']; ?></span>
 
                 <svg width="60" height="60" viewBox="0 0 100 100">
@@ -54,10 +54,10 @@
 
         <!-- MAIN NAVBAR -->
 
-        <nav class="navbar d-none d-lg-flex">
+        <nav id="dropdown-menu" class="navbar d-none d-md-flex">
             <ul>
 
-                <li class="nav-item">
+                <li class="nav-item disable" title="Coming Soon!">
                     <a href="#" class="nav-link">
                         <svg class="svg" width="45" height="45" viewBox="0 0 45 45"
                              xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +69,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item disable" title="Coming Soon!">
                     <a href="#" class="nav-link">
                         <svg class="svg" width="45" height="45" viewBox="0 0 45 45"
                              xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +95,7 @@
                         Mappool
                     </a>
                 </li>
-
+<?php /*
                 <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <svg class="svg" width="49" height="43" viewBox="0 0 49 43" xmlns="http://www.w3.org/2000/svg">
@@ -115,9 +115,9 @@
                         Contact
                     </a>
                 </li>
-
+*/ ?>
                 <!-- FOR MOBILE ONLY -->
-                <li class="nav-item d-sm-none">
+                <li class="nav-item d-md-none">
                     <a href="https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=http://mappool-website-project.nath/connexion&scope=public"
                        class="nav-link active">
                         <?php if (isset($_SESSION['user']) && strlen($_SESSION['user']->osu_id) > 2): ?>
@@ -139,7 +139,7 @@
         </nav>
 
         <!-- NAV DESKTOP LEFT -->
-        <div class="nav-desktop d-none d-lg-flex">
+        <div class="nav-desktop d-none d-md-flex">
             <!--
             <svg class="twitter" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                 <path d="M32 5.28503C30.81 5.80703 29.542 6.15303 28.22 6.32103C29.58 5.50903 30.618 4.23303 31.106 2.69503C29.838 3.45103 28.438 3.98503 26.946 4.28303C25.742 3.00103 24.026 2.20703 22.154 2.20703C18.522 2.20703 15.598 5.15503 15.598 8.76903C15.598 9.28903 15.642 9.78903 15.75 10.265C10.296 9.99903 5.47 7.38503 2.228 3.40303C1.662 4.38503 1.33 5.50903 1.33 6.71903C1.33 8.99103 2.5 11.005 4.244 12.171C3.19 12.151 2.156 11.845 1.28 11.363C1.28 11.383 1.28 11.409 1.28 11.435C1.28 14.623 3.554 17.271 6.536 17.881C6.002 18.027 5.42 18.097 4.816 18.097C4.396 18.097 3.972 18.073 3.574 17.985C4.424 20.583 6.836 22.493 9.704 22.555C7.472 24.301 4.638 25.353 1.57 25.353C1.032 25.353 0.516 25.329 0 25.263C2.906 27.137 6.35 28.207 10.064 28.207C22.136 28.207 28.736 18.207 28.736 9.53903C28.736 9.24903 28.726 8.96903 28.712 8.69103C30.014 7.76703 31.108 6.61303 32 5.28503Z"/>
@@ -192,13 +192,13 @@
                  onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"
                  aria-label="Main Menu">
 
-                    <svg width="50" height="50" viewBox="0 0 100 100">
-                        <path class="line line1"
-                              d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"/>
-                        <path class="line line2" d="M 20,50 H 80"/>
-                        <path class="line line3"
-                              d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"/>
-                    </svg>
+                <svg width="40" height="40" viewBox="0 0 100 100">
+                    <path class="line line1"
+                          d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"/>
+                    <path class="line line2" d="M 20,50 H 80"/>
+                    <path class="line line3"
+                          d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"/>
+                </svg>
 
             </div>
 
@@ -236,7 +236,7 @@
     </div>
 
     <!-- HEADER MOBILE
-    <form class="d-sm-none search-mobile">
+    <form class="d-md-none search-mobile">
 
         <img class="header-logo" src="/assets/img/logo_1_a.png" alt="notre super logo">
 
