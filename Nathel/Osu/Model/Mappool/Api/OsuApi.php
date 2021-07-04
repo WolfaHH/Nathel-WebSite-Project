@@ -106,6 +106,8 @@ class OsuApi
         $response = curl_exec($curl);
 
         curl_close($curl);
+
+
         return json_decode($response, true);
 
     }
@@ -125,7 +127,8 @@ class OsuApi
     {
         $this->user_token = $token_user;
 
-        $endpoint = 'https://osu.ppy.sh/Api/v2/me/osu';
+        $endpoint = 'https://osu.ppy.sh/api/v2/me/osu';
+
         return self::apiQueryGET($token=1, $endpoint);
     }
     public function getBeatmapInfo($map_id){

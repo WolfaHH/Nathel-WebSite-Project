@@ -10,7 +10,6 @@ use Nathel\Osu\Model\Mappool\Api;
 use Nathel\Osu\Model\Mappool\Database as Data;
 use Nathel\Osu\View\Mappool as View;
 
-
 class UserController extends Controller
 {
     protected function setUser($params)
@@ -34,11 +33,10 @@ class UserController extends Controller
         // traitement de donnée
         self::updateSession();
 
-        $user = $this->setUser($params);
+        $user = $this->setUser($params['id']);
 
         // appel visuel de la page
         View\View::header();
-
         View\UserView::banner($user);
 
         View\UserView::activity($user);

@@ -2,10 +2,10 @@
 
 /******************** NameSpace *********************/
 namespace Nathel\Osu\Controller\Mappool;
-
+//bonjour
 
 /* LOADING OBJECT */
-require_once realpath('../vendor/autoload.php');
+require_once '../vendor/autoload.php';
 //require '../controller/Autoloader.php';
 
 
@@ -28,6 +28,7 @@ use AltoRouter;
 
 /* STARTING USER SESSION AND REFRESH USER CONNECTION*/
 session_start();
+
 
 if (isset($_SESSION['OsuApi']) === False){
 
@@ -67,6 +68,7 @@ $match ['param'] -> request _GET or _POST
  */
 
 //$_SESSION['user']->osu_id = 1;
+
 if (is_array($match)) {
 
     $params = $match['params'];
@@ -74,8 +76,14 @@ if (is_array($match)) {
 
 
     if ($match['target'] === 'user') {
-        $controller = new Control\UserController();
-        $controller->showUser($params);
+        if (Data\User::checkUser($params['id']) === False){
+            Control\Controller::error();
+        }
+        else{
+            $controller = new Control\UserController();
+            $controller->showUser($params);
+        }
+
     }
 
     if ($match['target'] === 'userUpdate') { // Utilité ?
@@ -88,19 +96,25 @@ if (is_array($match)) {
         $controller->showHome();
     }
     if ($match['target'] === 'collection') {
+        if (Data\Collection::checkCollection($params['id']) === False){
+            Control\Controller::error();
+        }
+        else{
+            $controller = new Control\CollectionController();
+            $controller->showCollectionPage($params);
+        }
 
-        $controller = new Control\CollectionController();
-        $controller->showCollectionPage($params);
+
     }
 
     if ($match['target'] === 'yourpools') {
 
-        \Nathel\User::checkLogged();
+        Data\User::checkLogged();
         $controller = new Control\ManagePoolsController();
         $controller->showManagePools();
     }
     if ($match['target'] === 'create') {
-
+        Data\User::checkLogged();
         $controller = new Control\CreateCollectionController();
         $controller->show();
     }
@@ -121,8 +135,13 @@ if (is_array($match)) {
     }
 
     if ($match['target'] === 'connexion') {
+        if (isset($_GET['error']) === True && $_GET['error'] === 'access_denied'){
+            Control\Controller::error();
+        }
+        else{
+            Control\ConnexionController::login_button();
+        }
 
-        Control\ConnexionController::login_button();
     }
     if ($match['target'] === 'search') {
 

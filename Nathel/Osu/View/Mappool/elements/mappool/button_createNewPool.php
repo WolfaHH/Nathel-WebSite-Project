@@ -1,4 +1,4 @@
-<form class="" action="?" method="post">
+<form class="" action="create" method="get">
 
     <button type="submit" class="">
 

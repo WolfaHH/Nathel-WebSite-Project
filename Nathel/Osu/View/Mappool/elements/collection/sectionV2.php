@@ -1,11 +1,16 @@
+<?php
+use Nathel\Osu\Model\Mappool\Database as Data;
+use Nathel\Osu\View\Mappool as View;
+?>
+
 <section class="bg-medium">
 
     <?php
     echo "bla";
 
     foreach ($collections as $collection_user) {
-        $collection = new \Nathel\Collection($collection_user['id']);
-        \Nathel\CollectionView::showV2($collection);
+        $collection = new Data\Collection($collection_user['id']);
+        View\CollectionView::showV2($collection);
     }
     ?>
 

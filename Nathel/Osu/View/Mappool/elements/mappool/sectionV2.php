@@ -1,11 +1,16 @@
+<?php
+use Nathel\Osu\Model\Mappool\Database as Data;
+use Nathel\Osu\View\Mappool as View;
+?>
+
 <section class="bg-medium">
 
     <?php
 
     foreach ($mappools as $mappool_user) {
-        $mappool = new \Nathel\Mappool($mappool_user['id']);
+        $mappool = new Data\Mappool($mappool_user['id']);
 
-        \Nathel\MappoolView::show($mappool);
+        View\MappoolView::show($mappool);
     }
     ?>
 

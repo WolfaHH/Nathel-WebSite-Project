@@ -34,6 +34,16 @@ class Collection extends Dbh
         return $stmt->fetch();
     }
 
+    public static function checkCollection($id)
+    {
+        $stmt = self::connectToDb()->prepare('SELECT * FROM collections WHERE id = :id');
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+    }
+
     public function getCollectionMappools(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM mappools WHERE collection_id = :collection_id');
@@ -49,14 +59,14 @@ class Collection extends Dbh
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
+*/
     public function getCollectionContributors(): array
     {
         $stmt = self::connectToDb()->prepare('SELECT * FROM contributors WHERE collection_id = :collection_id');
         $stmt->bindParam(':collection_id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll();
-    }*/
+    }
 
     public function getLastContributor(): array
     {

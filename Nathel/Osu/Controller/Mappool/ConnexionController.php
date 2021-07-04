@@ -22,8 +22,10 @@ abstract class ConnexionController extends Controller
 
     public static function login_button()
     {
+
         // Fonction verif token_user not expired
         if (isset($_SESSION['OsuApi']) === False){
+
             $_SESSION['OsuApi'] = new Api\OsuApi();
         }
 
@@ -31,6 +33,7 @@ abstract class ConnexionController extends Controller
         $token = $OsuApi->getToken($_GET['code']);
         $api = $OsuApi->getOwnUserInfo($token);
         $id = $api['id'];
+
 
         if (is_array(Data\User::checkUser($id)) === False) {
 
@@ -49,13 +52,20 @@ abstract class ConnexionController extends Controller
 
         $_SESSION['user'] = new Data\User($id);
         $_SESSION['user']->token = $token;
-
-
+        //var_dump($_SESSION);
+        //die();
         //if (isset($_SESSION['REQUEST_URI'])){
           //  $ch = $_SESSION['REQUEST_URI'];
             //header('Location: ' . $ch);
         //}else{
-            header('Location: /');
+
+        if (isset($_SESSION['REQUEST_URI'])){
+            header('Location: '. $_SESSION['REQUEST_URI']);
+        }else{
+            header('Location : /');
+        }
+
+
         //}
 
     }

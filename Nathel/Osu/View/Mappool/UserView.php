@@ -11,11 +11,12 @@ use Nathel\Osu\Model\Mappool\Database as Data;
 use Nathel\Osu\View\Mappool as View;
 
 
-class UserView extends View
+Abstract class UserView extends View\View
 {
 
     public static function banner(Data\User $user)
     {
+
         $submitted = $user->getUserMappools();
         $completed = $user->getUserCompletedMappool();
         $follow = $user->getUserFollows();
