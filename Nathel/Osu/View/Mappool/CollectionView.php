@@ -10,10 +10,10 @@ use Nathel\Osu\Model\Mappool\Database as Data;
 use Nathel\Osu\View\Mappool as View;
 
 
-class CollectionView extends View
+Abstract class CollectionView extends View\View
 {
 
-    public static function show(Collection $collection)
+    public static function show($collection)
     {
         /*
         if (isset($_SESSION['user'])){
@@ -53,9 +53,15 @@ class CollectionView extends View
         endforeach;
 
         $tags = $collection->getCollectionTags();
+        $contributors = [];
+        foreach($collection->getCollectionContributors() as $contributor){
+            $user_tmp = new Data\User($contributor['user_id']);
+            array_push($contributors, $user_tmp->name);
+        }
 
-        //$contributors = $collection->getCollectionContributors();
-        $contributors = "Thrace12, NATH, Farrell-Shey";
+        $contributors = implode(', ', $contributors);
+
+
 
         require '../Nathel/Osu/View/Mappool/elements/collection/showV2.php';
     }
@@ -63,7 +69,7 @@ class CollectionView extends View
     public static function sectionV2($collections)
     {
 
-        require '../view/elements/collection/sectionV2.php';
+        require '../Nathel/Osu/View/Mappool/elements/collection/sectionV2.php';
     }
 
 

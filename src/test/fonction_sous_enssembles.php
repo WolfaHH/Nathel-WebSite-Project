@@ -26,4 +26,3 @@ function P($E)
 }
 
 $x = array('a','b','c');
-var_dump(P($x));

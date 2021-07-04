@@ -17,9 +17,9 @@
         <?php echo $contributors; ?>
     </div>
 
-    Bouton Edit
+    <a href="http://mappool-website-project.nath/edit/<?php echo $collection->id;?>">Edit</a>
 
-    Bouton supprimer
+    Delete it
 
     <div>
 

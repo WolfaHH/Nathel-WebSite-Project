@@ -5,15 +5,12 @@
     "require": {
         "altorouter/altorouter": "1.2.0",
       "ext-pdo": "*",
-      "ext-curl": "*",
-      "ext-json": "*"
+      "ext-curl": "*"
     },
   "autoload": {
     "psr-4": {
       "Nathel\\": "Nathel/"
     }
 
-  },
-  "name": "vendor-name/test",
-  "description": "test"
+  }
 }

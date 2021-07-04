@@ -48,11 +48,8 @@ class User extends Dbh
 
 
     public static function checkLogged(){
-
         if (strlen($_SESSION['user']->osu_id) < 2){
             header('Location: https://osu.ppy.sh/oauth/authorize?response_type=code&client_id=4227&redirect_uri=http://mappool-website-project.nath/connexion&scope=public');
-
-
 
         }
 

@@ -40,6 +40,7 @@ class ManagePoolsController extends Controller
 
         $collections = $user->getUserCollections();
 
+
         View\CollectionView::sectionV2($collections);
 
         View\View::footer();

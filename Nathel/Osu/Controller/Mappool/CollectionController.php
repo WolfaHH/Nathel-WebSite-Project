@@ -31,7 +31,7 @@ class CollectionController extends Controller
     public function showCollectionPage($params)
     {
         Control\Controller::storeURI();
-        $this->collection = new Collection($params['id']);
+        $this->collection = new Data\Collection($params['id']);
         $this->mappools = $this->collection->getCollectionMappools();
 
         View\View::header();
