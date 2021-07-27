@@ -2,7 +2,7 @@
 
 /******************** NameSpace *********************/
 namespace Nathel\Osu\Controller\Mappool;
-//bonjour
+
 
 /* LOADING OBJECT */
 require_once '../vendor/autoload.php';
@@ -17,27 +17,20 @@ use Nathel\Osu\Model\Mappool\Database as Data;
 use Nathel\Osu\View\Mappool as View;
 use AltoRouter;
 
-//die('je meurs bruhhhh');
-
-// \Nathel\Autoloader::Register();
-
-/* ACTIVE THIS WHEN YOU WANT TO DEBUG */
-//echo'<br><br><br><br>';
-
 
 
 /* STARTING USER SESSION AND REFRESH USER CONNECTION*/
 session_start();
 
-
+/* Load API object in the session*/
 if (isset($_SESSION['OsuApi']) === False){
 
-    $_SESSION['OsuApi'] = new Api\OsuApi(); // A term, bascu user token de osu Api dans classe user
+    $_SESSION['OsuApi'] = new Api\OsuApi();
 
 }
 
 
-
+/* Reload session via last session or cookies, if possible */
 Control\ConnexionController::verif_login_page();
 
 
@@ -63,12 +56,9 @@ $router->map('GET', '/search', 'search', 'search');
 
 
 $_SESSION ['match'] = $match = $router->match();
-/*
-$match ['param'] -> request _GET or _POST
- */
 
-//$_SESSION['user']->osu_id = 1;
 
+/* If there's a match */
 if (is_array($match)) {
 
     $params = $match['params'];
@@ -151,13 +141,7 @@ if (is_array($match)) {
 
 
 
-/*
-    if (isset($match['target'])) {
-        $class = ucfirst($match['target']) . 'Controller';
-        $controller = new $class();
-        $controller->Update();
-    }
-*/
 } else {
+    /* If there's no good matches, return the error page*/
     Control\Controller::error();
 }

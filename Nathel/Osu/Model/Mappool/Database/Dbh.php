@@ -6,6 +6,7 @@ namespace Nathel\Osu\Model\Mappool\Database;
 use \PDO;
 
 class Dbh {
+    // Those constant variables have to be changed according you're in the prod version or in a personal localhost dev env.
     const HOST = 'localhost';
     const USER = 'root';
     const PWD = '';

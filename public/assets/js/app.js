@@ -115,8 +115,8 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Wamp64\www\Mappool-website-project\src\js\app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! D:\Wamp64\www\Mappool-website-project\src\sass\app.scss */"./src/sass/app.scss");
+__webpack_require__(/*! D:\laragon\www\Mappool-website-project\src\js\app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\www\Mappool-website-project\src\sass\app.scss */"./src/sass/app.scss");
 
 
 /***/ })

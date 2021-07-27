@@ -4,18 +4,18 @@ namespace Nathel\Osu\Model\Mappool\Api;
 
 
 class OsuApi
-{
+{   // Those constant variables have to be changed according you're in the prod version or in a personal localhost dev env.
     const CLIENT_ID = 4227;
     const SECRET = 'kB9lkO0UUgvjdOmizgHUE5FJdM1d6JpTCJG0UFGr';
     const URI = 'http://mappool-website-project.nath/connexion';
 
-    public $current_credentials_token;
-    protected $user_token;
+    public $current_credentials_token; // Token used, whatever the user is logged or not
+    protected $user_token; // Token you get while a user logs, used to get his informations
 
 
     public function getToken($code=null)
     {
-        // Method that get a token code
+        // Method that get a token code, credentials ($code = null) or user one
         $curl = curl_init();
         if ($code == null):
             $payload = [
@@ -67,13 +67,14 @@ class OsuApi
     }
     public static function refreshToken($queryType)
     {
-        //Method that refresh a token code when it expired
+
+        // Method that refresh a token code when it expired, not done yet
 
     }
 
     public function apiQueryGET(bool $token, string $endpoint, array $params=null, array $body=null, array $header=null)
     {
-        // GET template for queries in the Api
+        // this method is the "GET template" for queries in the Api
         $curl = curl_init();
         $url = $endpoint;
         if ($params !== null){
@@ -114,9 +115,9 @@ class OsuApi
 
 
 
-    // -------- QUERIES -----------------
+    // -------- QUERIES USED -----------------
 
-
+    //USER
     public function GetUserInfo(int $user_id)
     {
         $endpoint = "https://osu.ppy.sh/Api/v2/users/".$user_id;
@@ -131,6 +132,8 @@ class OsuApi
 
         return self::apiQueryGET($token=1, $endpoint);
     }
+
+    // MAPS
     public function getBeatmapInfo($map_id){
         $this->getToken(null);
 

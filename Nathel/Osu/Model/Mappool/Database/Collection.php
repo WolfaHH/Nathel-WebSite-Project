@@ -247,7 +247,7 @@ class Collection extends Dbh
 
     public static function getMostPopular($filters=False)
     {
-        //$filters = [11,6,7,2];
+
         if ($filters === False){
 
             $stmt = self::connectToDb()->prepare('SELECT DISTINCT * FROM mappools mp INNER JOIN collections cl ON mp.collection_id = cl.id ORDER BY mp.follow');
@@ -294,6 +294,9 @@ class Collection extends Dbh
 
     public static function P($E)
     {
+        /* This function aims to get all the differents mathematical subsets of a set.
+        this site explains how the algorithm works : <https://python.jpvweb.com/python/mesrecettespython/doku.php?id=parties_ensemble>
+        */
         $P = array();
         $i = 0;
         $max_i = 2**(count($E))-1;
@@ -318,6 +321,7 @@ class Collection extends Dbh
 
     public static function  searchCollectionsWithName($mots)
     {
+        // Search collections that search all collections that contains $mots in the name.
         $queries = self::P($mots);
         $collections = array();
         foreach ($queries as $key => $query){
@@ -353,13 +357,15 @@ class Collection extends Dbh
                 $collections = array_merge($collections, $tmp);
             }
         }
-        //var_dump($collections);
+
         return $collections;
     }
     // fonctions pour contributeur ; requete : SELECT * FROM contributors cb INNER JOIN collections cl ON cb.collection_id = cl.id WHERE cb.user_id = X
 
+
     public static function searchCollectionWithContributors($mots)
     {
+        // This function is not used anymore.
         foreach ($mots as $mot){
             $stmt = self::connectToDb()->prepare('SELECT * FROM contributors cb INNER JOIN collections cl ON cb.collection_id = cl.id WHERE cb.user_id = :id');
             $stmt->bindParam(':mot1', $mot);
