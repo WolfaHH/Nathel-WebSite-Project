@@ -50,14 +50,14 @@ abstract class ConnexionController extends Controller
 
         }
 
+        // Création de la session du user
         $_SESSION['user'] = new Data\User($id);
         $_SESSION['user']->token = $token;
-        //var_dump($_SESSION);
-        //die();
-        //if (isset($_SESSION['REQUEST_URI'])){
-          //  $ch = $_SESSION['REQUEST_URI'];
-            //header('Location: ' . $ch);
-        //}else{
+
+        // Création du cookie de sauvegarde
+
+        setcookie('auth', $_SESSION['user']->osu_id);
+
 
         if (isset($_SESSION['REQUEST_URI'])){
             header('Location: '. $_SESSION['REQUEST_URI']);
@@ -66,21 +66,18 @@ abstract class ConnexionController extends Controller
         }
 
 
-        //}
+
 
     }
 
     public static function verif_login_page()
     {
-        if (isset($_SESSION['user'])) {
+        if (isset($_COOKIE['auth'])) {
 
-            //Controller::updateSession(); A Mettre plus tard ptet; idk
+            // Création de la session
 
-        } elseif (isset($_COOKIE['token_user'])) {
-            var_dump($_COOKIE);
-            $_SESSION['$token_user'] = $_COOKIE['token_user'];
-            $_SESSION['refresh_token_user'] = $_COOKIE['$refresh_token_user'];
-            self::connect_user();
+            $_SESSION['user'] = new Data\User($_COOKIE['auth']);
+
         }
     }
 

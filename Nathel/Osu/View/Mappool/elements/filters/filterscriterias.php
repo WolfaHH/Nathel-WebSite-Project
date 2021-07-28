@@ -22,7 +22,7 @@
     <p>Categories</p>
 
     <input type="checkbox" id="tournament" name="category[]" value="5"
-           checked>
+           >
     <label for="tournament">tournament</label>
 
     <input type="checkbox" id="fun" name="category[]" value="6">

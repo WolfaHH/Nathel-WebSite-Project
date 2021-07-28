@@ -53,8 +53,10 @@ class SearchCollectionsController extends Controller
         if ((array_key_exists('search',$_GET) === False) or (strlen($_GET['search'])===0)){
             if ((array_key_exists('gm',$_GET) === False) and (array_key_exists('category[]',$_GET) === False)) {
                 $collections = Data\Collection::getMostPopular();
+
                 }
                 else{
+
                     $collections = Data\Collection::getMostPopular($filters);
                 }
             }

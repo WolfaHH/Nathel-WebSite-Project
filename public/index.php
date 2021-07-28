@@ -34,7 +34,6 @@ if (isset($_SESSION['OsuApi']) === False){
 Control\ConnexionController::verif_login_page();
 
 
-
 /* ROOTING MAP*/
 
 $uri = $_SERVER['REQUEST_URI'];

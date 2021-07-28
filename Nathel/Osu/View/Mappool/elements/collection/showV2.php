@@ -18,7 +18,7 @@
     </div>
 
     <a href="http://mappool-website-project.nath/edit/<?php echo $collection->id;?>">Edit</a>
-
+    <a href="http://mappool-website-project.nath/edit/<?php echo $collection->id;?>">Edit</a>
     Delete it
 
     <div>
