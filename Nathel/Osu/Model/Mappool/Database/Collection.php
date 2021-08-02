@@ -1,6 +1,7 @@
 <?php
 
 namespace Nathel\Osu\Model\Mappool\Database;
+use Nathel\Osu\Model\Dbh;
 
 class Collection extends Dbh
 {

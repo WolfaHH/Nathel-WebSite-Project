@@ -1,6 +1,6 @@
 <?php
 
-namespace Nathel\Osu\Model\Mappool\Api;
+namespace Nathel\Osu\Model\Api;
 
 
 class OsuApi

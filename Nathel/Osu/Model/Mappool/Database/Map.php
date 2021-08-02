@@ -2,8 +2,8 @@
 
 namespace Nathel\Osu\Model\Mappool\Database;
 
+use Nathel\Osu\Model\Dbh;
 
-use Cassandra\Exception\TruncateException;
 
 class Map extends Dbh{
 

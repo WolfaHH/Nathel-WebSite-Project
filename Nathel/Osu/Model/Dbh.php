@@ -1,6 +1,6 @@
 <?php
 
-namespace Nathel\Osu\Model\Mappool\Database;
+namespace Nathel\Osu\Model;
 
 
 use \PDO;

@@ -1,7 +1,7 @@
 <?php
 
 namespace Nathel\Osu\Model\Mappool\Database;
-
+use Nathel\Osu\Model\Dbh;
 
 class Mappool extends Dbh{
 
